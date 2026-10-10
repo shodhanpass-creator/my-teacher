@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Master Web Development</title>
+    <style>
+        /* ========================================
+           ROOT VARIABLES
+           ======================================== */
+        :root {
+            --primary: #6c5ce7;
+            --dark: #0a0a23;
+            --card-bg: #16163a;
+            --card-border: #2d2d5e;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9);
+        }
+
+        /* ========================================
+           RESET STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========================================
+           BODY STYLES
+           ======================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ========================================
+           WEATHER CONTAINER
+           ======================================== */
+        .weather-app {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* ========================================
+           SEARCH SECTION
+           ======================================== */
+        .search-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-input::placeholder {
+            color: #666;
+        }
+
+        .search-btn {
+            padding: 15px 25px;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        /* ========================================
+           WEATHER CARD
+           ======================================== */
+        .weather-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .city-name {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .country {
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* ========================================
+           WEATHER ICON
+           ======================================== */
+        .weather-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        /* ========================================
+           TEMPERATURE
+           ======================================== */
+        .temperature {
+            font-size: 4rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #888;
+            font-size: 1.2rem;
+            text-transform: capitalize;
+            margin-bottom: 30px;
+        }
+
+        /* ========================================
+           WEATHER DETAILS
+           ======================================== */
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .detail {
+            background: var(--dark);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+        }
+
+        .detail-label {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           LOADING STATE
+           ======================================== */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+
+        /* ========================================
+           ERROR STATE
+           ======================================== */
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #d63031;
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 400px) {
+            .search-section {
+                flex-direction: column;
+            }
+
+            .weather-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         WEATHER APP HTML STRUCTURE
+         ======================================== -->
+    <div class="weather-app">
+        <!-- Search Section -->
+        <div class="search-section">
+            <input type="text" class="search-input" id="searchInput" placeholder="Enter city name...">
+            <button class="search-btn" id="searchBtn">Search</button>
+        </div>
+
+        <!-- Weather Card -->
+        <div class="weather-card" id="weatherCard">
+            <div class="loading" id="loading">
+                <p>Loading weather data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         JAVASCRIPT - Weather App Logic
+         ======================================== -->
+    <script>
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const weatherCard = document.getElementById('weatherCard');
+        const loading = document.getElementById('loading');
+
+        // API Key (using OpenWeatherMap free tier)
+        // Note: In production, never expose API keys in frontend code
+        const API_KEY = 'demo'; // Replace with real API key
+
+        // Weather icons mapping
+        const weatherIcons = {
+            'Clear': '☀️',
+            'Clouds': '☁️',
+            'Rain': '🌧️',
+            'Drizzle': '🌦️',
+            'Thunderstorm': '⛈️',
+            'Snow': '❄️',
+            'Mist': '🌫️',
+            'Haze': '🌫️',
+            'Fog': '🌫️'
+        };
+
+        // Demo weather data (since we can't use real API without key)
+        const demoData = {
+            'london': {
+                name: 'London',
+                sys: { country: 'GB' },
+                main: { temp: 18, humidity: 72, feels_like: 17, pressure: 1012 },
+                weather: [{ main: 'Clouds', description: 'overcast clouds' }],
+                wind: { speed: 5.2 }
+            },
+            'new york': {
+                name: 'New York',
+                sys: { country: 'US' },
+                main: { temp: 24, humidity: 65, feels_like: 23, pressure: 1015 },
+                weather: [{ main: 'Clear', description: 'clear sky' }],
+                wind: { speed: 3.8 }
+            },
+            'tokyo': {
+                name: 'Tokyo',
+                sys: { country: 'JP' },
+                main: { temp: 28, humidity: 80, feels_like: 30, pressure: 1008 },
+                weather: [{ main: 'Rain', description: 'light rain' }],
+                wind: { speed: 2.5 }
+            },
+            'paris': {
+                name: 'Paris',
+                sys: { country: 'FR' },
+                main: { temp: 20, humidity: 68, feels_like: 19, pressure: 1013 },
+                weather: [{ main: 'Clouds', description: 'scattered clouds' }],
+                wind: { speed: 4.1 }
+            },
+            'sydney': {
+                name: 'Sydney',
+                sys: { country: 'AU' },
+                main: { temp: 22, humidity: 70, feels_like: 21, pressure: 1016 },
+                weather: [{ main: 'Clear', description: 'clear sky' }],
+                wind: { speed: 6.3 }
+            }
+        };
+
+        // Get weather icon
+        function getWeatherIcon(weather) {
+            return weatherIcons[weather] || '🌡️';
+        }
+
+        // Display weather data
+        function displayWeather(data) {
+            const icon = getWeatherIcon(data.weather[0].main);
+            
+            weatherCard.innerHTML = `
+                <h2 class="city-name">${data.name}</h2>
+                <p class="country">${data.sys.country}</p>
+                
+                <div class="weather-icon">${icon}</div>
+                
+                <div class="temperature">${Math.round(data.main.temp)}°C</div>
+                <p class="description">${data.weather[0].description}</p>
+                
+                <div class="weather-details">
+                    <div class="detail">
+                        <div class="detail-label">Feels Like</div>
+                        <div class="detail-value">${Math.round(data.main.feels_like)}°C</div>
+                    </div>
+                    <div class="detail">
+                        <div class="detail-label">Humidity</div>
+                        <div class="detail-value">${data.main.humidity}%</div>
+                    </div>
+                    <div class="detail">
+                        <div class="detail-label">Wind Speed</div>
+                        <div class="detail-value">${data.wind.speed} m/s</div>
+                    </div>
+                    <div class="detail">
+                        <div class="detail-label">Pressure</div>
+                        <div class="detail-value">${data.main.pressure} hPa</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Display error
+        function displayError(message) {
+            weatherCard.innerHTML = `
+                <div class="error">
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        // Display loading
+        function showLoading() {
+            weatherCard.innerHTML = `
+                <div class="loading">
+                    <p>Loading weather data...</p>
+                </div>
+            `;
+        }
+
+        // Fetch weather data
+        async function fetchWeather(city) {
+            showLoading();
+            
+            try {
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // Check demo data first
+                const demoCity = city.toLowerCase();
+                if (demoData[demoCity]) {
+                    displayWeather(demoData[demoCity]);
+                    return;
+                }
+
+                // For real API (uncomment when you have API key)
+                /*
+                const response = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+                );
+                
+                if (!response.ok) {
+                    throw new Error('City not found');
+                }
+                
+                const data = await response.json();
+                displayWeather(data);
+                */
+
+                // Demo fallback
+                displayError('City not found. Try: London, New York, Tokyo, Paris, or Sydney');
+            } catch (error) {
+                displayError('Error fetching weather data. Please try again.');
+            }
+        }
+
+        // Search handler
+        function handleSearch() {
+            const city = searchInput.value.trim();
+            if (city) {
+                fetchWeather(city);
+                searchInput.value = '';
+            }
+        }
+
+        // Event listeners
+        searchBtn.addEventListener('click', handleSearch);
+        
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        // Load default city on page load
+        fetchWeather('London');
+    </script>
+</body>
+</html>

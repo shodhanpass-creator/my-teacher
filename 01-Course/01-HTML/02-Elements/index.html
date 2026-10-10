@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Elements Reference - Master Web Development</title>
+    <style>
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --accent: #fd79a8; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        .output-box { background: #ffffff; color: #333; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border: 2px dashed var(--card-border); }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .tag-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .tag-name { font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-bottom: 0.5rem; }
+        .tag-type { display: inline-block; padding: 0.3rem 0.8rem; background: rgba(108, 92, 231, 0.2); color: var(--primary); border-radius: 20px; font-size: 0.8rem; margin-bottom: 1rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">HTML</a> → 
+            Elements Reference
+        </div>
+
+        <h1>HTML Elements Reference</h1>
+        <p>Complete guide to every HTML element with examples and explanations.</p>
+
+        <!-- ========================================
+             TEXT ELEMENTS
+             ======================================== -->
+        <h2>📝 Text Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;h1&gt; to &lt;h6&gt;</div>
+            <span class="tag-type">Heading Elements</span>
+            <p>Headings define the title or subtitle of a page. <span class="inline-code">&lt;h1&gt;</span> is the largest and most important, <span class="inline-code">&lt;h6&gt;</span> is the smallest.</p>
+            <p><strong>When to use:</strong> Use <span class="inline-code">&lt;h1&gt;</span> for the main page title (only ONE per page). Use <span class="inline-code">&lt;h2&gt;</span> for section titles, <span class="inline-code">&lt;h3&gt;</span> for subsections, etc.</p>
+            <p><strong>When NOT to use:</strong> Don't use headings just to make text big. Use CSS for styling.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;h1&gt;Main Title (biggest)&lt;/h1&gt;
+&lt;h2&gt;Section Title&lt;/h2&gt;
+&lt;h3&gt;Subsection Title&lt;/h3&gt;
+&lt;h4&gt;Smaller Subsection&lt;/h4&gt;
+&lt;h5&gt;Even Smaller&lt;/h5&gt;
+&lt;h6&gt;Smallest Heading&lt;/h6&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <h1 style="color: #333; font-size: 2rem;">Main Title (biggest)</h1>
+                <h2 style="color: #333; font-size: 1.6rem;">Section Title</h2>
+                <h3 style="color: #333; font-size: 1.3rem;">Subsection Title</h3>
+                <h4 style="color: #333; font-size: 1.1rem;">Smaller Subsection</h4>
+                <h5 style="color: #333; font-size: 1rem;">Even Smaller</h5>
+                <h6 style="color: #333; font-size: 0.9rem;">Smallest Heading</h6>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;p&gt;</div>
+            <span class="tag-type">Paragraph Element</span>
+            <p>The paragraph element defines a block of text. Browsers add space before and after paragraphs automatically.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;This is my first paragraph.&lt;/p&gt;
+&lt;p&gt;This is my second paragraph. Browsers add spacing between paragraphs automatically.&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;br&gt;</div>
+            <span class="tag-type">Line Break (Self-closing)</span>
+            <p>Inserts a single line break. Use sparingly - use CSS margin/padding instead for spacing.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;First line&lt;br&gt;Second line&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;hr&gt;</div>
+            <span class="tag-type">Horizontal Rule (Self-closing)</span>
+            <p>Creates a horizontal line to separate content sections.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;Content above&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Content below&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;strong&gt;</div>
+            <span class="tag-type">Strong Importance</span>
+            <p>Makes text <strong>bold and important</strong>. Screen readers emphasize this text. Use for important content.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;This is &lt;strong&gt;very important&lt;/strong&gt; text.&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <p style="color: #333;">This is <strong>very important</strong> text.</p>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;em&gt;</div>
+            <span class="tag-type">Emphasis</span>
+            <p>Makes text <em>italic and emphasized</em>. Screen readers change tone when reading this.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;This is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <p style="color: #333;">This is <em>emphasized</em> text.</p>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;b&gt; and &lt;i&gt;</div>
+            <span class="tag-type">Bold and Italic (No Emphasis)</span>
+            <p><span class="inline-code">&lt;b&gt;</span> makes text bold without importance. <span class="inline-code">&lt;i&gt;</span> makes text italic without emphasis. Use <span class="inline-code">&lt;strong&gt;</span> and <span class="inline-code">&lt;em&gt;</span> instead when possible.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;This is &lt;b&gt;bold&lt;/b&gt; text.&lt;/p&gt;
+&lt;p&gt;This is &lt;i&gt;italic&lt;/i&gt; text.&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;mark&gt;</div>
+            <span class="tag-type">Highlighted Text</span>
+            <p>Marks text with a yellow background, like using a highlighter pen.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;This is &lt;mark&gt;highlighted&lt;/mark&gt; text.&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <p style="color: #333;">This is <mark style="background: yellow; padding: 0 4px;">highlighted</mark> text.</p>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;small&gt;</div>
+            <span class="tag-type">Small Text</span>
+            <p>Makes text smaller. Use for copyright, legal text, or side comments.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;Normal text&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;This is smaller text&lt;/small&gt;&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;sub&gt; and &lt;sup&gt;</div>
+            <span class="tag-type">Subscript and Superscript</span>
+            <p><span class="inline-code">&lt;sub&gt;</span> makes text smaller and lower (like H₂O). <span class="inline-code">&lt;sup&gt;</span> makes text smaller and higher (like x²).</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;H&lt;sub&gt;2&lt;/sub&gt;O (water)&lt;/p&gt;
+&lt;p&gt;x&lt;sup&gt;2&lt;/sup&gt; (x squared)&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <p style="color: #333;">H<sub>2</sub>O (water) &nbsp;&nbsp;&nbsp; x<sup>2</sup> (x squared)</p>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;del&gt; and &lt;ins&gt;</div>
+            <span class="tag-type">Deleted and Inserted Text</span>
+            <p><span class="inline-code">&lt;del&gt;</span> shows text that was removed (with a line through it). <span class="inline-code">&lt;ins&gt;</span> shows text that was added (underlined).</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;Price: &lt;del&gt;$50&lt;/del&gt; &lt;ins&gt;$30&lt;/ins&gt;&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <p style="color: #333;">Price: <del style="color: #999;">$50</del> <ins style="color: #333;">$30</ins></p>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;blockquote&gt;</div>
+            <span class="tag-type">Block Quotation</span>
+            <p>Used for long quotations from another source. Browsers usually indent this content.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;blockquote cite="https://example.com"&gt;
+    &lt;p&gt;This is a long quote from another source.&lt;/p&gt;
+&lt;/blockquote&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;q&gt;</div>
+            <span class="tag-type">Inline Quotation</span>
+            <p>For short inline quotations. Browsers automatically add quotation marks.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;She said &lt;q&gt;hello&lt;/q&gt; to me.&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <p style="color: #333;">She said <q>hello</q> to me.</p>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;abbr&gt;</div>
+            <span class="tag-type">Abbreviation</span>
+            <p>Defines an abbreviation or acronym. Shows full text on hover.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;p&gt;I study at &lt;abbr title="Massachusetts Institute of Technology"&gt;MIT&lt;/abbr&gt;.&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <p style="color: #333;">I study at <abbr title="Massachusetts Institute of Technology" style="text-decoration: underline dotted; cursor: help;">MIT</abbr>.</p>
+            </div>
+        </div>
+
+        <!-- ========================================
+             LINK ELEMENTS
+             ======================================== -->
+        <h2>🔗 Link Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;a&gt;</div>
+            <span class="tag-type">Anchor (Link) Element</span>
+            <p>Creates hyperlinks to other pages, files, or locations. The most important element on the web!</p>
+            <p><strong>Attributes:</strong></p>
+            <ul>
+                <li><span class="inline-code">href</span> - URL to link to (required)</li>
+                <li><span class="inline-code">target="_blank"</span> - Opens in new tab</li>
+                <li><span class="inline-code">rel="noopener"</span> - Security for external links</li>
+                <li><span class="inline-code">download</span> - Downloads the linked file</li>
+            </ul>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;a href="https://google.com"&gt;Visit Google&lt;/a&gt;
+
+&lt;a href="https://google.com" target="_blank" rel="noopener"&gt;
+    Open Google in new tab
+&lt;/a&gt;
+
+&lt;a href="file.pdf" download&gt;Download PDF&lt;/a&gt;
+
+&lt;a href="mailto:email@example.com"&gt;Send Email&lt;/a&gt;
+
+&lt;a href="#section2"&gt;Jump to Section 2&lt;/a&gt;</code></pre>
+            </div>
+        </div>
+
+        <!-- ========================================
+             LIST ELEMENTS
+             ======================================== -->
+        <h2>📋 List Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</div>
+            <span class="tag-type">Unordered and Ordered Lists</span>
+            <p><span class="inline-code">&lt;ul&gt;</span> = Bulleted list (unordered). <span class="inline-code">&lt;ol&gt;</span> = Numbered list (ordered). <span class="inline-code">&lt;li&gt;</span> = List item (goes inside ul or ol).</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;!-- Unordered (bullet) list --&gt;
+&lt;ul&gt;
+    &lt;li&gt;Apples&lt;/li&gt;
+    &lt;li&gt;Bananas&lt;/li&gt;
+    &lt;li&gt;Oranges&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Ordered (numbered) list --&gt;
+&lt;ol&gt;
+    &lt;li&gt;First step&lt;/li&gt;
+    &lt;li&gt;Second step&lt;/li&gt;
+    &lt;li&gt;Third step&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+            </div>
+            <div class="output-box">
+                <ul style="color: #333; margin-left: 1.5rem;">
+                    <li>Apples</li>
+                    <li>Bananas</li>
+                    <li>Oranges</li>
+                </ul>
+                <ol style="color: #333; margin-left: 1.5rem;">
+                    <li>First step</li>
+                    <li>Second step</li>
+                    <li>Third step</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt;</div>
+            <span class="tag-type">Description List</span>
+            <p>Used for key-value pairs like definitions, glossaries, or FAQ items.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HyperText Markup Language - the structure of web pages&lt;/dd&gt;
+
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Cascading Style Sheets - the appearance of web pages&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+            </div>
+        </div>
+
+        <!-- ========================================
+             MEDIA ELEMENTS
+             ======================================== -->
+        <h2>🖼️ Media Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;img&gt;</div>
+            <span class="tag-type">Image (Self-closing)</span>
+            <p>Embeds an image. Always include <span class="inline-code">alt</span> attribute for accessibility.</p>
+            <p><strong>Attributes:</strong></p>
+            <ul>
+                <li><span class="inline-code">src</span> - Image path (required)</li>
+                <li><span class="inline-code">alt</span> - Alternative text (required for accessibility)</li>
+                <li><span class="inline-code">width</span> and <span class="inline-code">height</span> - Dimensions</li>
+                <li><span class="inline-code">loading="lazy"</span> - Lazy loading for performance</li>
+            </ul>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;img src="photo.jpg" alt="A beautiful sunset" width="400" height="300"&gt;
+
+&lt;!-- Lazy loaded image --&gt;
+&lt;img src="photo.jpg" alt="A beach" loading="lazy"&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;video&gt;</div>
+            <span class="tag-type">Video Player</span>
+            <p>Embeds a video player with controls.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;video controls width="640" height="360"&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.webm" type="video/webm"&gt;
+    Your browser does not support video.
+&lt;/video&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;audio&gt;</div>
+            <span class="tag-type">Audio Player</span>
+            <p>Embeds an audio player.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;audio controls&gt;
+    &lt;source src="song.mp3" type="audio/mpeg"&gt;
+    Your browser does not support audio.
+&lt;/audio&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;iframe&gt;</div>
+            <span class="tag-type">Inline Frame</span>
+            <p>Embeds another webpage inside your page. Common for YouTube videos or maps.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" 
+        width="560" height="315" 
+        frameborder="0" 
+        allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SEMANTIC STRUCTURE ELEMENTS
+             ======================================== -->
+        <h2>🏗️ Semantic Structure Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;header&gt;</div>
+            <span class="tag-type">Page Header</span>
+            <p>Defines the header section of a page or section. Usually contains logo, navigation, and title.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;header&gt;
+    &lt;h1&gt;My Website&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;a href="home.html"&gt;Home&lt;/a&gt;
+        &lt;a href="about.html"&gt;About&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;nav&gt;</div>
+            <span class="tag-type">Navigation</span>
+            <p>Contains navigation links. Helps search engines understand your site structure.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="home.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="about.html"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="contact.html"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;main&gt;</div>
+            <span class="tag-type">Main Content</span>
+            <p>The main content of the page. Only ONE <span class="inline-code">&lt;main&gt;</span> per page. Helps screen readers skip to content.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Blog Post Title&lt;/h2&gt;
+        &lt;p&gt;Post content here...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;footer&gt;</div>
+            <span class="tag-type">Page Footer</span>
+            <p>Contains footer information like copyright, contact, and social links.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 My Website&lt;/p&gt;
+    &lt;a href="privacy.html"&gt;Privacy Policy&lt;/a&gt;
+&lt;/footer&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;section&gt;</div>
+            <span class="tag-type">Section</span>
+            <p>Groups related content together. Like chapters in a book.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;section&gt;
+    &lt;h2&gt;About Us&lt;/h2&gt;
+    &lt;p&gt;We are a company that...&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;h2&gt;Our Services&lt;/h2&gt;
+    &lt;p&gt;We offer...&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;article&gt;</div>
+            <span class="tag-type">Article</span>
+            <p>Self-contained content that could be distributed independently (blog post, news story, forum post).</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;article&gt;
+    &lt;h2&gt;My Blog Post&lt;/h2&gt;
+    &lt;p&gt;Published on Jan 1, 2026&lt;/p&gt;
+    &lt;p&gt;Content of the blog post...&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;aside&gt;</div>
+            <span class="tag-type">Sidebar Content</span>
+            <p>Content related to the main content but can stand alone (sidebars, ads, related links).</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;aside&gt;
+    &lt;h3&gt;Related Articles&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="post1.html"&gt;Post 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="post2.html"&gt;Post 2&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/aside&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;div&gt; and &lt;span&gt;</div>
+            <span class="tag-type">Generic Containers</span>
+            <p><span class="inline-code">&lt;div&gt;</span> = Block container (takes full width). <span class="inline-code">&lt;span&gt;</span> = Inline container (only takes needed width). Use when no semantic element fits.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;div style="background: yellow; padding: 20px;"&gt;
+    &lt;p&gt;This is a div (block element)&lt;/p&gt;
+    &lt;p&gt;It takes full width&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This is &lt;span style="color: red;"&gt;red text&lt;/span&gt; in a paragraph.&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+
+        <!-- ========================================
+             TABLE ELEMENTS
+             ======================================== -->
+        <h2>📊 Table Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;table&gt;, &lt;tr&gt;, &lt;td&gt;, &lt;th&gt;</div>
+            <span class="tag-type">Tables</span>
+            <p>Tables display data in rows and columns.</p>
+            <ul>
+                <li><span class="inline-code">&lt;table&gt;</span> - The table container</li>
+                <li><span class="inline-code">&lt;tr&gt;</span> - Table row</li>
+                <li><span class="inline-code">&lt;th&gt;</span> - Table header (bold and centered)</li>
+                <li><span class="inline-code">&lt;td&gt;</span> - Table data cell</li>
+            </ul>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;John&lt;/td&gt;
+        &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Jane&lt;/td&gt;
+        &lt;td&gt;30&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+            </div>
+        </div>
+
+        <!-- ========================================
+             FORM ELEMENTS
+             ======================================== -->
+        <h2>📝 Form Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;form&gt;</div>
+            <span class="tag-type">Form Container</span>
+            <p>Contains form elements for collecting user input.</p>
+            <p><strong>Attributes:</strong></p>
+            <ul>
+                <li><span class="inline-code">action</span> - Where to send form data</li>
+                <li><span class="inline-code">method</span> - HTTP method (GET or POST)</li>
+            </ul>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;form action="/submit" method="POST"&gt;
+    &lt;label for="name"&gt;Name:&lt;/label&gt;
+    &lt;input type="text" id="name" name="name" required&gt;
+
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" required&gt;
+
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;input&gt;</div>
+            <span class="tag-type">Input Field (Self-closing)</span>
+            <p>The most versatile form element. Different types for different data.</p>
+            <p><strong>Common Types:</strong></p>
+            <ul>
+                <li><span class="inline-code">type="text"</span> - Single line text</li>
+                <li><span class="inline-code">type="password"</span> - Hidden text (dots)</li>
+                <li><span class="inline-code">type="email"</span> - Email validation</li>
+                <li><span class="inline-code">type="number"</span> - Numbers only</li>
+                <li><span class="inline-code">type="date"</span> - Date picker</li>
+                <li><span class="inline-code">type="checkbox"</span> - Check box</li>
+                <li><span class="inline-code">type="radio"</span> - Radio button</li>
+                <li><span class="inline-code">type="file"</span> - File upload</li>
+            </ul>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;input type="text" placeholder="Enter name"&gt;
+&lt;input type="email" placeholder="Enter email"&gt;
+&lt;input type="number" min="0" max="100"&gt;
+&lt;input type="date"&gt;
+&lt;input type="checkbox" id="agree"&gt;
+&lt;label for="agree"&gt;I agree&lt;/label&gt;
+&lt;input type="radio" name="gender" id="male"&gt;
+&lt;label for="male"&gt;Male&lt;/label&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;textarea&gt;</div>
+            <span class="tag-type">Multi-line Text Input</span>
+            <p>For longer text input like comments or messages.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;textarea name="message" rows="5" cols="40" placeholder="Type your message..."&gt;&lt;/textarea&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;select&gt; and &lt;option&gt;</div>
+            <span class="tag-type">Dropdown List</span>
+            <p>Creates a dropdown menu.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;select name="color"&gt;
+    &lt;option value=""&gt;Select a color&lt;/option&gt;
+    &lt;option value="red"&gt;Red&lt;/option&gt;
+    &lt;option value="blue"&gt;Blue&lt;/option&gt;
+    &lt;option value="green"&gt;Green&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;button&gt;</div>
+            <span class="tag-type">Button</span>
+            <p>Clickable button. Use <span class="inline-code">type="submit"</span> for form submission, <span class="inline-code">type="button"</span> for JavaScript actions.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;button type="submit"&gt;Submit Form&lt;/button&gt;
+&lt;button type="button" onclick="alert('Clicked!')"&gt;Click Me&lt;/button&gt;</code></pre>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SPECIAL ELEMENTS
+             ======================================== -->
+        <h2>✨ Special Elements</h2>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;details&gt; and &lt;summary&gt;</div>
+            <span class="tag-type">Disclosure Widget (Accordion)</span>
+            <p>Creates a collapsible section. Click the summary to show/hide content.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;details&gt;
+    &lt;summary&gt;Click to learn more&lt;/summary&gt;
+    &lt;p&gt;This content is hidden by default.&lt;/p&gt;
+    &lt;p&gt;Click the summary to toggle visibility.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;dialog&gt;</div>
+            <span class="tag-type">Dialog Box</span>
+            <p>Creates a modal dialog box.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;dialog id="myDialog"&gt;
+    &lt;p&gt;This is a dialog box!&lt;/p&gt;
+    &lt;button onclick="myDialog.close()"&gt;Close&lt;/button&gt;
+&lt;/dialog&gt;
+
+&lt;button onclick="myDialog.showModal()"&gt;Open Dialog&lt;/button&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;template&gt;</div>
+            <span class="tag-type">Template Content</span>
+            <p>Contains content that is not rendered immediately but can be activated by JavaScript.</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;template id="myTemplate"&gt;
+    &lt;div class="card"&gt;
+        &lt;h2&gt;Card Title&lt;/h2&gt;
+        &lt;p&gt;Card content&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+    const template = document.getElementById('myTemplate');
+    const clone = template.content.cloneNode(true);
+    document.body.appendChild(clone);
+&lt;/script&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;canvas&gt;</div>
+            <span class="tag-type">Drawing Canvas</span>
+            <p>Used for drawing graphics with JavaScript (charts, games, animations).</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;canvas id="myCanvas" width="400" height="200"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(10, 10, 100, 50);
+&lt;/script&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tag-card">
+            <div class="tag-name">&lt;svg&gt;</div>
+            <span class="tag-type">Scalable Vector Graphics</span>
+            <p>Used for scalable vector graphics (icons, logos, charts).</p>
+            <div class="example-box">
+                <div class="example-label">Example</div>
+<pre><code>&lt;svg width="100" height="100"&gt;
+    &lt;circle cx="50" cy="50" r="40" fill="blue" /&gt;
+&lt;/svg&gt;</code></pre>
+            </div>
+        </div>
+
+        <!-- ========================================
+             NAVIGATION BUTTONS
+             ======================================== -->
+        <div class="nav-buttons">
+            <a href="../01-Basics/03-html-document-structure.html" class="nav-btn">← Previous: Document Structure</a>
+            <a href="../03-Forms/index.html" class="nav-btn">Next: Forms →</a>
+        </div>
+    </div>
+</body>
+</html>

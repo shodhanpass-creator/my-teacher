@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Events - Master Web Development</title>
+    <style>
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --accent: #fd79a8; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">JavaScript</a> → 
+            Events
+        </div>
+
+        <h1>JavaScript Events</h1>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 20 minutes</span>
+            <span>🎯 Difficulty: Intermediate</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: WHAT ARE EVENTS?
+             ======================================== -->
+        <h2>What are Events?</h2>
+
+        <p>Events are things that happen in the browser - like clicking a button, pressing a key, or submitting a form. JavaScript can <strong>listen</strong> for these events and respond to them.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>Events are like a <strong>doorbell</strong>. When someone presses the doorbell (event), you hear it and respond (event handler) - you open the door!</p>
+        </div>
+
+        <h3>Common Event Types</h3>
+        <ul>
+            <li><strong>Mouse:</strong> click, dblclick, mouseenter, mouseleave, mousedown, mouseup</li>
+            <li><strong>Keyboard:</strong> keydown, keyup, keypress</li>
+            <li><strong>Form:</strong> submit, input, change, focus, blur</li>
+            <li><strong>Window:</strong> load, resize, scroll, unload</li>
+            <li><strong>Touch:</strong> touchstart, touchmove, touchend</li>
+        </ul>
+
+        <!-- ========================================
+             SECTION 2: ADDING EVENT LISTENERS
+             ======================================== -->
+        <h2>Adding Event Listeners</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Three Ways to Add Events</div>
+<pre><code>// Method 1: addEventListener (BEST - Recommended)
+let button = document.getElementById("myBtn");
+button.addEventListener("click", function() {
+    alert("Clicked!");
+});
+
+// Method 2: onclick property
+button.onclick = function() {
+    alert("Clicked!");
+};
+
+// Method 3: Inline (AVOID!)
+// &lt;button onclick="alert('Hi')"&gt;Click&lt;/button&gt;</code></pre>
+        </div>
+
+        <div class="note success">
+            <div class="note-title">✅ Why addEventListener is Best:</div>
+            <ul style="margin-left: 1rem;">
+                <li>You can add multiple event listeners to the same element</li>
+                <li>You can remove event listeners easily</li>
+                <li>It separates HTML from JavaScript</li>
+                <li>It gives you more control over the event</li>
+            </ul>
+        </div>
+
+        <!-- ========================================
+             SECTION 3: THE EVENT OBJECT
+             ======================================== -->
+        <h2>The Event Object</h2>
+
+        <p>When an event occurs, JavaScript creates an <strong>event object</strong> with information about what happened.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Event Object Properties</div>
+<pre><code>button.addEventListener("click", function(event) {
+    // Event type
+    console.log(event.type);        // "click"
+    
+    // Target element
+    console.log(event.target);      // The clicked element
+    
+    // Mouse position
+    console.log(event.clientX);     // X position
+    console.log(event.clientY);     // Y position
+    
+    // Time
+    console.log(event.timeStamp);   // When it happened
+    
+    // Prevent default behavior
+    event.preventDefault();
+    
+    // Stop event from bubbling up
+    event.stopPropagation();
+});</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 4: MOUSE EVENTS
+             ======================================== -->
+        <h2>Mouse Events</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Mouse Events</div>
+<pre><code>let box = document.getElementById("box");
+
+// Click event
+box.addEventListener("click", function() {
+    console.log("Box clicked!");
+});
+
+// Double click
+box.addEventListener("dblclick", function() {
+    console.log("Box double-clicked!");
+});
+
+// Mouse enter (when mouse enters element)
+box.addEventListener("mouseenter", function() {
+    box.style.backgroundColor = "lightblue";
+});
+
+// Mouse leave (when mouse leaves element)
+box.addEventListener("mouseleave", function() {
+    box.style.backgroundColor = "white";
+});
+
+// Mouse down (when button pressed)
+box.addEventListener("mousedown", function() {
+    console.log("Mouse button pressed!");
+});
+
+// Mouse up (when button released)
+box.addEventListener("mouseup", function() {
+    console.log("Mouse button released!");
+});
+
+// Mouse move (when mouse moves)
+box.addEventListener("mousemove", function(event) {
+    console.log(`Mouse at: ${event.clientX}, ${event.clientY}`);
+});</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 5: KEYBOARD EVENTS
+             ======================================== -->
+        <h2>Keyboard Events</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Keyboard Events</div>
+<pre><code>// Keydown - when key is pressed
+document.addEventListener("keydown", function(event) {
+    console.log("Key pressed:", event.key);
+    console.log("Key code:", event.code);
+    
+    // Check for specific keys
+    if (event.key === "Enter") {
+        console.log("Enter key pressed!");
+    }
+    
+    if (event.key === "Escape") {
+        console.log("Escape key pressed!");
+    }
+    
+    // Ctrl + S to save
+    if (event.ctrlKey && event.key === "s") {
+        event.preventDefault();
+        console.log("Save triggered!");
+    }
+});
+
+// Keyup - when key is released
+document.addEventListener("keyup", function(event) {
+    console.log("Key released:", event.key);
+});
+
+// Input event for text fields
+let input = document.getElementById("search");
+input.addEventListener("input", function() {
+    console.log("Current value:", this.value);
+});</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 6: FORM EVENTS
+             ======================================== -->
+        <h2>Form Events</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Form Events</div>
+<pre><code>let form = document.getElementById("myForm");
+let input = document.getElementById("email");
+
+// Submit event
+form.addEventListener("submit", function(event) {
+    event.preventDefault();  // Prevent page reload
+    
+    let formData = new FormData(form);
+    let email = formData.get("email");
+    console.log("Email:", email);
+});
+
+// Input event (fires on every keystroke)
+input.addEventListener("input", function() {
+    let value = this.value;
+    
+    // Real-time validation
+    if (value.includes("@")) {
+        this.style.borderColor = "green";
+    } else {
+        this.style.borderColor = "red";
+    }
+});
+
+// Change event (fires when value changes and loses focus)
+input.addEventListener("change", function() {
+    console.log("Value changed to:", this.value);
+});
+
+// Focus event
+input.addEventListener("focus", function() {
+    this.style.backgroundColor = "lightyellow";
+});
+
+// Blur event (loses focus)
+input.addEventListener("blur", function() {
+    this.style.backgroundColor = "white";
+});</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 7: EVENT BUBBLING
+             ======================================== -->
+        <h2>Event Bubbling</h2>
+
+        <p>When an event happens on an element, it <strong>bubbles up</strong> through its parent elements, triggering their event handlers too.</p>
+
+        <div class="diagram">
+EVENT BUBBLING:
+
+    When you click the BUTTON:
+
+    ┌─────────────────────────────────────┐
+    │  document                           │  ← Event bubbles UP
+    │  ┌─────────────────────────────┐   │
+    │  │  div                        │   │
+    │  │  ┌─────────────────────┐   │   │
+    │  │  │  button (clicked!)  │   │   │  ← Event starts HERE
+    │  │  └─────────────────────┘   │   │
+    │  └─────────────────────────────┘   │
+    └─────────────────────────────────────┘
+
+    Bubbling order: button → div → document</div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Event Delegation</div>
+<pre><code>// Instead of adding event to each item...
+// BAD: Adding to each item
+document.querySelectorAll(".item").forEach(item => {
+    item.addEventListener("click", function() {
+        console.log("Item clicked");
+    });
+});
+
+// GOOD: Event delegation (add to parent)
+document.getElementById("list").addEventListener("click", function(event) {
+    if (event.target.classList.contains("item")) {
+        console.log("Item clicked:", event.target.textContent);
+    }
+});</code></pre>
+        </div>
+
+        <div class="note success">
+            <div class="note-title">✅ Event Delegation Benefits:</div>
+            <ul style="margin-left: 1rem;">
+                <li>Works with dynamically added elements</li>
+                <li>Uses less memory (one handler instead of many)</li>
+                <li>Code is simpler and easier to maintain</li>
+            </ul>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../02-DOM/index.html" class="nav-btn">← Previous: DOM</a>
+            <a href="../04-Advanced/index.html" class="nav-btn">Next: Advanced JS →</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Path - Master Web Development</title>
+    <style>
+        /* DESIGN SYSTEM - same variables as all course pages */
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --info: #74b9ff; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); --shadow: 0 10px 40px rgba(0, 0, 0, 0.3); --radius: 16px; --transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.7; }
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(10, 10, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); padding: 1rem 0; }
+        nav { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--text); }
+        .hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 2rem 4rem; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
+        .btn { display: inline-block; padding: 1rem 2rem; border-radius: 50px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: var(--transition); }
+        .btn-primary { background: var(--gradient-1); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(108, 92, 231, 0.6); }
+        section { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+        .modules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .module-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 2rem; transition: var(--transition); }
+        .module-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow); }
+        .module-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .module-card p { color: var(--text-muted); margin-bottom: 0.5rem; }
+        .badge { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 1rem; background: rgba(253, 203, 110, 0.2); color: var(--warning); }
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--card-border); color: var(--text-muted); }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../../index.html" class="logo">MasterWebDev</a>
+            <ul class="nav-links">
+                <li><a href="../01-HTML/index.html">HTML</a></li>
+                <li><a href="../02-CSS/index.html">CSS</a></li>
+                <li><a href="../03-JavaScript/index.html">JavaScript</a></li>
+                <li><a href="../04-Git/index.html">Git</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h1>Backend — The Brain Behind the Buttons</h1>
+            <p>Your weather app already talked to a server. Now learn to BUILD one: APIs, databases, authentication, deployment.</p>
+            <a href="#modules" class="btn btn-primary">See the Path →</a>
+        </div>
+    </section>
+
+    <section id="modules">
+        <div class="section-header">
+            <h2>Backend Path Modules</h2>
+            <p>Unlocks in Phase 4 — after foundations and JavaScript depth</p>
+        </div>
+
+        <div class="modules-grid">
+            <div class="module-card">
+                <span class="badge">Coming soon</span>
+                <h3>01 — How the Web Really Works</h3>
+                <p>HTTP, requests/responses, status codes, DNS. The invisible machinery you've been using blindly.</p>
+            </div>
+            <div class="module-card">
+                <span class="badge">Coming soon</span>
+                <h3>02 — Node.js & Express</h3>
+                <p>Servers, routing, middleware. Your first "Hello World" served to the world.</p>
+            </div>
+            <div class="module-card">
+                <span class="badge">Coming soon</span>
+                <h3>03 — REST APIs</h3>
+                <p>Design endpoints professionals respect. CRUD, status codes, Postman testing.</p>
+            </div>
+            <div class="module-card">
+                <span class="badge">Coming soon</span>
+                <h3>04 — Databases & SQL</h3>
+                <p>SQLite to PostgreSQL. Schema design, queries, and why SQL outlives every trend.</p>
+            </div>
+            <div class="module-card">
+                <span class="badge">Coming soon</span>
+                <h3>05 — Auth & Security</h3>
+                <p>Password hashing, JWT, sessions. Where your XSS knowledge finally pays off.</p>
+            </div>
+            <div class="module-card">
+                <span class="badge">Coming soon</span>
+                <h3>06 — Deploy & Operate</h3>
+                <p>Linux CLI, Docker basics, CI/CD, cloud hosting. Ship it like a professional.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer><p>Built with ❤️ for aspiring web developers</p></footer>
+</body>
+</html>

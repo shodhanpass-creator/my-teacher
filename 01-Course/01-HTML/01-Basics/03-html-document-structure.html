@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: HTML Document Structure - Master Web Development</title>
+    <style>
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        .diagram { background: var(--dark-light); padding: 2rem; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); line-height: 1.4; }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .quiz { background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .quiz h3 { color: var(--warning); margin-bottom: 1rem; }
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-question p { font-weight: 600; color: var(--text); }
+        .quiz-options { list-style: none; margin-left: 0; }
+        .quiz-options li { padding: 0.5rem 0; }
+        .exercise { background: var(--card-bg); border: 2px solid var(--success); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .exercise h3 { color: var(--success); margin-bottom: 1rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">HTML</a> → 
+            <a href="index.html">Basics</a> → 
+            HTML Document Structure
+        </div>
+
+        <h1>Lesson 3: HTML Document Structure</h1>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 15 minutes</span>
+            <span>🎯 Difficulty: Beginner</span>
+            <span>📝 Lesson 3 of 6</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: THE BOILERPLATE
+             ======================================== -->
+        <h2>The HTML Boilerplate</h2>
+
+        <p>Every HTML document follows the same basic structure. This is called the <strong>boilerplate</strong>. Think of it like a recipe - you always need the same ingredients, but you can change the flavors.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 The Complete HTML5 Boilerplate</div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="My website description"&gt;
+    &lt;meta name="keywords" content="html, css, javascript"&gt;
+    &lt;meta name="author" content="Your Name"&gt;
+    &lt;title&gt;My Website&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Your content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <p>Let me explain every single line in detail:</p>
+
+        <!-- ========================================
+             SECTION 2: LINE-BY-LINE EXPLANATION
+             ======================================== -->
+        <h2>Line-by-Line Explanation</h2>
+
+        <h3>Line 1: <span class="inline-code">&lt;!DOCTYPE html&gt;</span></h3>
+        <div class="note">
+            <div class="note-title">📖 What is DOCTYPE?</div>
+            <p>The DOCTYPE declaration tells the browser <strong>which version of HTML</strong> to use. HTML5 uses <span class="inline-code">&lt;!DOCTYPE html&gt;</span>. Older versions had longer declarations.</p>
+            <p><strong>Why it matters:</strong> Without it, the browser might use "quirks mode" which causes inconsistent rendering.</p>
+        </div>
+
+        <h3>Line 2: <span class="inline-code">&lt;html lang="en"&gt;</span></h3>
+        <div class="note">
+            <div class="note-title">📖 The Root Element</div>
+            <p>The <span class="inline-code">&lt;html&gt;</span> tag is the <strong>root element</strong> - everything else goes inside it. The <span class="inline-code">lang="en"</span> attribute tells the browser the page is in English.</p>
+            <p><strong>Why lang matters:</strong> It helps screen readers (for blind users) pronounce words correctly, and helps search engines understand the language.</p>
+        </div>
+
+        <h3>Line 3: <span class="inline-code">&lt;meta charset="UTF-8"&gt;</span></h3>
+        <div class="note">
+            <div class="note-title">📖 Character Encoding</div>
+            <p>UTF-8 supports <strong>every character</strong> from every language - English, Chinese, Arabic, emojis, and more. Without this, special characters would show as garbled text.</p>
+        </div>
+
+        <h3>Line 4: <span class="inline-code">&lt;meta name="viewport"...&gt;</span></h3>
+        <div class="note">
+            <div class="note-title">📖 Mobile Responsiveness</div>
+            <p>This meta tag is <strong>essential for mobile devices</strong>. It tells the browser to set the width to the device's width and start at 100% zoom. Without it, your site would look tiny on phones.</p>
+        </div>
+
+        <h3>Line 5-7: Meta Tags for SEO</h3>
+        <div class="note">
+            <div class="note-title">📖 Search Engine Optimization</div>
+            <p><span class="inline-code">description</span> - Shows in Google search results under your link<br>
+            <span class="inline-code">keywords</span> - Helps search engines understand your page<br>
+            <span class="inline-code">author</span> - Credits the creator of the page</p>
+        </div>
+
+        <h3>Line 8: <span class="inline-code">&lt;title&gt;</span></h3>
+        <div class="note">
+            <div class="note-title">📖 Browser Tab Title</div>
+            <p>This is the text that appears in the <strong>browser tab</strong> and bookmark. It's also what shows in search results as the clickable link.</p>
+        </div>
+
+        <h3>Line 9: <span class="inline-code">&lt;link rel="stylesheet" href="styles.css"&gt;</span></h3>
+        <div class="note">
+            <div class="note-title">📖 Connecting CSS</div>
+            <p>This links an external CSS file to style your HTML. The <span class="inline-code">rel="stylesheet"</span> tells the browser "this is a stylesheet" and <span class="inline-code">href</span> points to the CSS file location.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 3: HEAD VS BODY
+             ======================================== -->
+        <h2>The &lt;head&gt; vs &lt;body&gt; Difference</h2>
+
+        <div class="diagram">
+╔══════════════════════════════════════════════════════════════╗
+║                    &lt;head&gt; vs &lt;body&gt;                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+    &lt;head&gt; SECTION (What the browser needs to KNOW)
+    ┌─────────────────────────────────────────────────────┐
+    │ • Page title (shows in browser tab)                │
+    │ • Meta information (description, keywords)         │
+    │ • Links to CSS files (styles)                      │
+    │ • Links to JavaScript files (behavior)             │
+    │ • Favicon (little icon in browser tab)             │
+    │                                                     │
+    │  Think: The LABEL on a jar of jam                  │
+    │  (Describes what's inside, but you don't eat it)   │
+    └─────────────────────────────────────────────────────┘
+
+    &lt;body&gt; SECTION (What the user SEES)
+    ┌─────────────────────────────────────────────────────┐
+    │ • Headings (h1, h2, h3...)                         │
+    │ • Paragraphs (p)                                   │
+    │ • Images (img)                                     │
+    │ • Links (a)                                        │
+    │ • Buttons                                          │
+    │ • Forms                                            │
+    │ • Everything visible on the page                   │
+    │                                                     │
+    │  Think: The JAM INSIDE the jar                     │
+    │  (What you actually see and enjoy)                 │
+    └─────────────────────────────────────────────────────┘</div>
+
+        <!-- ========================================
+             SECTION 4: COMMON META TAGS
+             ======================================== -->
+        <h2>Common Meta Tags</h2>
+
+        <p>Meta tags provide information about your webpage to browsers and search engines.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Common Meta Tags</div>
+<pre><code>&lt;!-- Character encoding --&gt;
+&lt;meta charset="UTF-8"&gt;
+
+&lt;!-- Mobile viewport --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+&lt;!-- SEO Description (shows in Google results) --&gt;
+&lt;meta name="description" content="Learn web development from scratch"&gt;
+
+&lt;!-- SEO Keywords --&gt;
+&lt;meta name="keywords" content="html, css, javascript, web development"&gt;
+
+&lt;!-- Author --&gt;
+&lt;meta name="author" content="John Doe"&gt;
+
+&lt;!-- Prevent search engines from indexing --&gt;
+&lt;meta name="robots" content="noindex"&gt;
+
+&lt;!-- Refresh page every 30 seconds --&gt;
+&lt;meta http-equiv="refresh" content="30"&gt;
+
+&lt!-- Redirect to another page after 5 seconds --&gt;
+&lt;meta http-equiv="refresh" content="5; url=https://google.com"&gt;
+
+&lt;!-- Favicon (icon in browser tab) --&gt;
+&lt;link rel="icon" type="image/x-icon" href="favicon.ico"&gt;</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 5: LINKING CSS AND JS
+             ======================================== -->
+        <h2>Linking CSS and JavaScript</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 External CSS (in &lt;head&gt;)</div>
+<pre><code>&lt;head&gt;
+    &lt;!-- Method 1: External CSS file (BEST for large projects) --&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+
+    &lt;!-- Method 2: Internal CSS (in &lt;head&gt;) --&gt;
+    &lt;style&gt;
+        body { background-color: #f0f0f0; }
+        h1 { color: blue; }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 External JavaScript (before &lt;/body&gt;)</div>
+<pre><code>&lt;body&gt;
+    &lt;!-- Your HTML content --&gt;
+
+    &lt;!-- Method 1: External JS file (BEST) --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+
+    &lt;!-- Method 2: Internal JS (in &lt;script&gt; tag) --&gt;
+    &lt;script&gt;
+        console.log('Hello from JavaScript!');
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+
+        <div class="note warning">
+            <div class="note-title">⚠️ Where to Place Script Tags?</div>
+            <p><strong>CSS</strong> goes in <span class="inline-code">&lt;head&gt;</span> so styles load before content (prevents flash of unstyled content).</p>
+            <p><strong>JavaScript</strong> goes before <span class="inline-code">&lt;/body&gt;</span> so HTML loads first, then scripts run (faster page load).</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 6: FAVICON
+             ======================================== -->
+        <h2>What is a Favicon?</h2>
+
+        <p>A favicon is the <strong>tiny icon</strong> that appears in the browser tab. It helps users identify your website.</p>
+
+        <div class="diagram">
+    Browser Tab:
+    ┌────────────────────────────────────┐
+    │ 📁 My Website - Google Chrome      │
+    │                                    │
+    │  ^^^^                              │
+    │  This is the favicon!              │
+    │                                    │
+    └────────────────────────────────────┘</div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Adding a Favicon</div>
+<pre><code>&lt;head&gt;
+    &lt;link rel="icon" type="image/x-icon" href="favicon.ico"&gt;
+    &lt;!-- Or for PNG images: --&gt;
+    &lt;link rel="icon" type="image/png" href="favicon.png"&gt;
+    &lt;!-- Or for SVG images: --&gt;
+    &lt;link rel="icon" type="image/svg+xml" href="favicon.svg"&gt;
+&lt;/head&gt;</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 7: COMPLETE EXAMPLE
+             ======================================== -->
+        <h2>Complete Example</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Complete HTML5 Document</div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="Welcome to my awesome website!"&gt;
+    &lt;title&gt;My Awesome Website&lt;/title&gt;
+    &lt;link rel="icon" href="favicon.ico"&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;a href="index.html"&gt;Home&lt;/a&gt;
+            &lt;a href="about.html"&gt;About&lt;/a&gt;
+            &lt;a href="contact.html"&gt;Contact&lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;h2&gt;About Me&lt;/h2&gt;
+        &lt;p&gt;I am learning web development!&lt;/p&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2026 My Website&lt;/p&gt;
+    &lt;/footer&gt;
+
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 8: QUIZ
+             ======================================== -->
+        <div class="quiz">
+            <h3>📝 Quiz: Test Your Knowledge</h3>
+
+            <div class="quiz-question">
+                <p>1. What goes inside the &lt;head&gt; section?</p>
+                <ul class="quiz-options">
+                    <li>A) Headings and paragraphs</li>
+                    <li>B) Meta tags and title</li>
+                    <li>C) Images and buttons</li>
+                    <li>D) Forms and tables</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. Why should JavaScript be placed before &lt;/body&gt;?</p>
+                <ul class="quiz-options">
+                    <li>A) For security</li>
+                    <li>B) So HTML loads first, making page faster</li>
+                    <li>C) JavaScript only works there</li>
+                    <li>D) Browsers require it</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. What does the lang attribute do?</p>
+                <ul class="quiz-options">
+                    <li>A) Changes the font</li>
+                    <li>B) Specifies the page language</li>
+                    <li>C) Adds translation</li>
+                    <li>D) Nothing important</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SECTION 9: EXERCISES
+             ======================================== -->
+        <div class="exercise">
+            <h3>🏋️ Practice Exercises</h3>
+
+            <p><strong>Exercise 1:</strong> Create a complete HTML5 boilerplate file called <span class="inline-code">index.html</span>. Include all the essential meta tags.</p>
+
+            <p><strong>Exercise 2:</strong> Create a file called <span class="inline-code">styles.css</span> and link it to your HTML. Add some basic styles like background color and heading color.</p>
+
+            <p><strong>Exercise 3:</strong> Add a favicon to your page. You can use any .ico or .png image.</p>
+        </div>
+
+        <!-- ========================================
+             NAVIGATION BUTTONS
+             ======================================== -->
+        <div class="nav-buttons">
+            <a href="02-how-browsers-work.html" class="nav-btn">← Previous: How Browsers Work</a>
+            <a href="04-head-elements.html" class="nav-btn">Next: Head Elements →</a>
+        </div>
+    </div>
+</body>
+</html>

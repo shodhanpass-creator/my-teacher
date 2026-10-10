@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: What is HTML? - Master Web Development</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --dark: #0a0a23;
+            --dark-light: #1a1a3e;
+            --text: #ffffff;
+            --text-muted: #b2b2d0;
+            --card-bg: #16163a;
+            --card-border: #2d2d5e;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --info: #74b9ff;
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 3rem 0 1rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 0.8rem;
+            color: var(--info);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .note {
+            background: var(--card-bg);
+            border-left: 4px solid var(--info);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note.danger { border-left-color: var(--danger); }
+
+        .note-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        pre {
+            background: var(--dark-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--card-border);
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+        }
+
+        .inline-code {
+            background: var(--dark-light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: var(--accent);
+        }
+
+        .example-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .example-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .output-box {
+            background: #ffffff;
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px dashed var(--card-border);
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .diagram {
+            background: var(--dark-light);
+            padding: 2rem;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--card-border);
+            line-height: 1.4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            background: var(--card-bg);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .quiz {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz h3 {
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-question p {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .quiz-options {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .quiz-options li {
+            padding: 0.5rem 0;
+        }
+
+        .exercise {
+            background: var(--card-bg);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .exercise h3 {
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            .lesson-meta { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">HTML</a> → 
+            <a href="index.html">Basics</a> → 
+            What is HTML?
+        </div>
+
+        <h1>Lesson 1: What is HTML?</h1>
+
+        <div class="lesson-meta">
+            <span>📖 Reading time: 15 minutes</span>
+            <span>🎯 Difficulty: Beginner</span>
+            <span>📝 Lesson 1 of 6</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: WHAT IS HTML?
+             ======================================== -->
+        <h2>What is HTML?</h2>
+
+        <p>HTML stands for <strong>HyperText Markup Language</strong>. Let's break down every word:</p>
+
+        <ul>
+            <li><strong>HyperText</strong> = Text that can link to other text (like clicking a link on a website)</li>
+            <li><strong>Markup</strong> = Tags that describe the structure of content</li>
+            <li><strong>Language</strong> = A system of rules that computers understand</li>
+        </ul>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>HTML is like the <strong>skeleton of a house</strong>. It defines where the walls, doors, and windows go. Without HTML, a website has no structure - just like a house without a frame would collapse.</p>
+        </div>
+
+        <h3>Why Does HTML Exist?</h3>
+        <p>The internet was created so computers could share information. But computers need a special language to understand how to display that information. HTML is that language. It tells the browser: "This is a heading," "This is a paragraph," "This is a link."</p>
+
+        <!-- ========================================
+             SECTION 2: HOW THE BROWSER READS HTML
+             ======================================== -->
+        <h2>How Does the Browser Read HTML?</h2>
+
+        <p>When you type a web address and press Enter, here's what happens:</p>
+
+        <div class="diagram">
+Step 1: You type "google.com" and press Enter
+         |
+Step 2: Your browser sends a request to Google's server
+         |
+Step 3: Google's server sends back an HTML file
+         |
+Step 4: Your browser reads the HTML file line by line
+         |
+Step 5: The browser builds a tree structure (called DOM)
+         |
+Step 6: The browser draws everything on your screen
+         |
+Result: You see a beautiful webpage!</div>
+
+        <div class="note success">
+            <div class="note-title">✅ Simple Explanation:</div>
+            <p>The browser is like a <strong>translator</strong>. It reads HTML code and translates it into something you can see - buttons, images, text, and more!</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 3: YOUR FIRST HTML FILE
+             ======================================== -->
+        <h2>Your First HTML File</h2>
+
+        <p>Let's create your very first HTML file. Every HTML file follows this basic structure:</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Example: Basic HTML Structure</div>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <p>Let's explain every single line:</p>
+
+        <h3>Line 1: <span class="inline-code">&lt;!DOCTYPE html&gt;</span></h3>
+        <p>This tells the browser: "Hey browser, this is an HTML5 document." It's like showing your ID at the door. Without it, the browser might get confused about what version of HTML you're using.</p>
+
+        <h3>Line 2: <span class="inline-code">&lt;html lang="en"&gt;</span></h3>
+        <p>This is the <strong>root element</strong>. Everything in your HTML file goes inside this tag. The <span class="inline-code">lang="en"</span> part tells the browser the page is in English.</p>
+
+        <h3>Line 3: <span class="inline-code">&lt;head&gt;</span></h3>
+        <p>The <span class="inline-code">&lt;head&gt;</span> section contains information <strong>about</strong> the page that users don't see directly. It's like the label on a jar - it describes what's inside.</p>
+
+        <h3>Line 4: <span class="inline-code">&lt;meta charset="UTF-8"&gt;</span></h3>
+        <p>This tells the browser to use UTF-8 character encoding. Without this, special characters like é, ñ, or ü might show up as weird symbols.</p>
+
+        <h3>Line 5: <span class="inline-code">&lt;meta name="viewport"...&gt;</span></h3>
+        <p>This makes your website look good on phones and tablets. Without it, your site would look tiny on mobile devices.</p>
+
+        <h3>Line 6: <span class="inline-code">&lt;title&gt;My First Webpage&lt;/title&gt;</span></h3>
+        <p>This is the text that appears in the browser tab. Try opening the file and look at the tab!</p>
+
+        <h3>Line 8-12: <span class="inline-code">&lt;body&gt;...&lt;/body&gt;</span></h3>
+        <p>The <span class="inline-code">&lt;body&gt;</span> contains everything that users <strong>can see</strong> - headings, paragraphs, images, buttons, etc.</p>
+
+        <h3>Line 9: <span class="inline-code">&lt;h1&gt;Hello, World!&lt;/h1&gt;</span></h3>
+        <p>This creates a <strong>big heading</strong>. Think of it like the title of a book chapter.</p>
+
+        <h3>Line 10: <span class="inline-code">&lt;p&gt;This is my first webpage.&lt;/p&gt;</span></h3>
+        <p>This creates a <strong>paragraph</strong> of text.</p>
+
+        <div class="output-box">
+            <strong>Expected Output in Browser:</strong><br><br>
+            <h1 style="color: #333;">Hello, World!</h1>
+            <p style="color: #555;">This is my first webpage.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 4: HTML TAGS EXPLAINED
+             ======================================== -->
+        <h2>Understanding HTML Tags</h2>
+
+        <p>HTML uses <strong>tags</strong> to mark up content. A tag is a special word enclosed in angle brackets <span class="inline-code">&lt; &gt;</span>.</p>
+
+        <div class="diagram">
+Most HTML tags come in PAIRS:
+
+    &lt;tagname&gt;   ← Opening tag (starts here)
+        Content goes here
+    &lt;/tagname&gt;  ← Closing tag (ends here) ← has a slash /
+
+Example:
+    &lt;p&gt;Hello&lt;/p&gt;
+     ^^^^         ^^^
+  Opening tag   Closing tag
+
+Some tags are SELF-CLOSING (no content inside):
+    &lt;br&gt;    ← Line break
+    &lt;hr&gt;    ← Horizontal line
+    &lt;img&gt;   ← Image</div>
+
+        <div class="note warning">
+            <div class="note-title">⚠️ Common Beginner Mistake:</div>
+            <p>Forgetting to close tags! Always make sure every opening tag has a closing tag (except self-closing tags). The browser might still display your content, but it can cause layout problems.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 5: NESTING ELEMENTS
+             ======================================== -->
+        <h2>Nesting Elements</h2>
+
+        <p>You can put elements inside other elements. This is called <strong>nesting</strong>. Think of it like Russian dolls - smaller dolls go inside bigger dolls.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Example: Nesting Elements</div>
+<pre><code>&lt;body&gt;
+    &lt;h1&gt;My Website&lt;/h1&gt;
+    &lt;p&gt;Welcome to &lt;strong&gt;my&lt;/strong&gt; website!&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+
+        <div class="diagram">
+NESTING RULES:
+
+    &lt;body&gt;                    ← Parent (contains others)
+        &lt;h1&gt;My Website&lt;/h1&gt;  ← Child of body
+        &lt;p&gt;Welcome to          ← Child of body
+            &lt;strong&gt;my&lt;/strong&gt;  ← Child of p (grandchild of body)
+        &lt;/p&gt;
+    &lt;/body&gt;
+
+Think of it like a FAMILY TREE:
+    - Body is the parent
+    - h1 and p are children
+    - strong is a grandchild</div>
+
+        <!-- ========================================
+             SECTION 6: HTML ELEMENTS OVERVIEW
+             ======================================== -->
+        <h2>HTML Elements Overview</h2>
+
+        <p>HTML has many elements. Here's a quick overview of the main categories:</p>
+
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Elements</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>Text</td>
+                <td>p, h1-h6, span, strong, em</td>
+                <td>Display text content</td>
+            </tr>
+            <tr>
+                <td>Links</td>
+                <td>a, link</td>
+                <td>Connect to other pages</td>
+            </tr>
+            <tr>
+                <td>Lists</td>
+                <td>ul, ol, li, dl</td>
+                <td>Organize items</td>
+            </tr>
+            <tr>
+                <td>Media</td>
+                <td>img, video, audio</td>
+                <td>Show images and play media</td>
+            </tr>
+            <tr>
+                <td>Forms</td>
+                <td>form, input, button</td>
+                <td>Collect user information</td>
+            </tr>
+            <tr>
+                <td>Structure</td>
+                <td>div, header, footer, nav</td>
+                <td>Organize page layout</td>
+            </tr>
+            <tr>
+                <td>Table</td>
+                <td>table, tr, td, th</td>
+                <td>Display data in rows/columns</td>
+            </tr>
+        </table>
+
+        <!-- ========================================
+             SECTION 7: HOW TO CREATE AN HTML FILE
+             ======================================== -->
+        <h2>How to Create an HTML File</h2>
+
+        <p>Follow these steps to create your first HTML file:</p>
+
+        <ol>
+            <li>Open a text editor (like Notepad, VS Code, or Sublime Text)</li>
+            <li>Type the HTML code</li>
+            <li>Save the file with a <strong>.html</strong> extension (like <span class="inline-code">index.html</span>)</li>
+            <li>Open the file in your web browser (double-click the file)</li>
+            <li>See your webpage!</li>
+        </ol>
+
+        <div class="note">
+            <div class="note-title">💡 Pro Tip:</div>
+            <p>Always save HTML files with <span class="inline-code">.html</span> extension. If you save as <span class="inline-code">.txt</span>, the browser won't know it's a webpage!</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 8: COMMENTS
+             ======================================== -->
+        <h2>HTML Comments</h2>
+
+        <p>Comments are notes you leave in your code for yourself or other developers. They are <strong>not shown</strong> on the webpage.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Example: HTML Comments</div>
+<pre><code>&lt;!-- This is a comment --&gt;
+
+&lt;!--
+    This is a multi-line comment.
+    You can write as many lines as you want.
+    The browser ignores everything here.
+--&gt;
+
+&lt;h1&gt;This heading is visible&lt;/h1&gt;
+
+&lt;!-- This paragraph is hidden from users --&gt;
+&lt;p&gt;This paragraph is visible.&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="note success">
+            <div class="note-title">✅ Why Use Comments?</div>
+            <ul style="margin-left: 1rem;">
+                <li>Explain complex code to yourself</li>
+                <li>Leave notes for other developers</li>
+                <li>Temporarily hide code without deleting it</li>
+                <li>Organize your code into sections</li>
+            </ul>
+        </div>
+
+        <!-- ========================================
+             SECTION 9: QUIZ
+             ======================================== -->
+        <div class="quiz">
+            <h3>📝 Quiz: Test Your Knowledge</h3>
+
+            <div class="quiz-question">
+                <p>1. What does HTML stand for?</p>
+                <ul class="quiz-options">
+                    <li>A) Home Tool Markup Language</li>
+                    <li>B) HyperText Markup Language</li>
+                    <li>C) Hyper Transfer Markup Language</li>
+                    <li>D) Home Transfer Language</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What does the &lt;!DOCTYPE html&gt; declaration do?</p>
+                <ul class="quiz-options">
+                    <li>A) Creates a heading</li>
+                    <li>B) Tells the browser this is an HTML5 document</li>
+                    <li>C) Adds a comment</li>
+                    <li>D) Creates a paragraph</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Which tag creates the largest heading?</p>
+                <ul class="quiz-options">
+                    <li>A) &lt;heading&gt;</li>
+                    <li>B) &lt;h6&gt;</li>
+                    <li>C) &lt;h1&gt;</li>
+                    <li>D) &lt;head&gt;</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. Where does the &lt;title&gt; tag go?</p>
+                <ul class="quiz-options">
+                    <li>A) Inside &lt;body&gt;</li>
+                    <li>B) Inside &lt;head&gt;</li>
+                    <li>C) Before &lt;!DOCTYPE&gt;</li>
+                    <li>D) After &lt;/html&gt;</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>5. How do you write a comment in HTML?</p>
+                <ul class="quiz-options">
+                    <li>A) // This is a comment</li>
+                    <li>B) /* This is a comment */</li>
+                    <li>C) &lt;!-- This is a comment --&gt;</li>
+                    <li>D) # This is a comment</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SECTION 10: EXERCISES
+             ======================================== -->
+        <div class="exercise">
+            <h3>🏋️ Practice Exercises</h3>
+
+            <p><strong>Exercise 1:</strong> Create an HTML file called <span class="inline-code">hello.html</span> that displays "Hello, World!" in a heading and your name in a paragraph.</p>
+
+            <p><strong>Exercise 2:</strong> Add the following to your HTML file:</p>
+            <ul style="margin-left: 1.5rem;">
+                <li>A heading that says "About Me"</li>
+                <li>A paragraph that says "I am learning HTML"</li>
+                <li>A comment that says "This is my practice file"</li>
+            </ul>
+
+            <p><strong>Exercise 3:</strong> Open your HTML file in a browser. What do you see? Can you spot the heading and paragraph?</p>
+        </div>
+
+        <!-- ========================================
+             NAVIGATION BUTTONS
+             ======================================== -->
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">← Previous: Course Overview</a>
+            <a href="02-how-browsers-work.html" class="nav-btn">Next: How Browsers Work →</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Course - Master Web Development</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5a4bd1;
+            --secondary: #00cec9;
+            --accent: #fd79a8;
+            --dark: #0a0a23;
+            --dark-light: #1a1a3e;
+            --text: #ffffff;
+            --text-muted: #b2b2d0;
+            --card-bg: #16163a;
+            --card-border: #2d2d5e;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.6);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .module-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .module-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .module-link:hover { gap: 1rem; }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../../index.html" class="logo">MasterWebDev</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../02-CSS/index.html">CSS</a></li>
+                <li><a href="../03-JavaScript/index.html">JavaScript</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h1>HTML - The Structure</h1>
+            <p>Learn how to create the skeleton of every website. HTML is the foundation of the entire web.</p>
+            <a href="01-Basics/01-what-is-html.html" class="btn btn-primary">Start Learning →</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <h2>HTML Course Modules</h2>
+            <p>Master every aspect of HTML step by step</p>
+        </div>
+
+        <div class="modules-grid">
+            <div class="module-card">
+                <h3>1. HTML Basics</h3>
+                <p>Understand what HTML is, how it works, and write your first code.</p>
+                <a href="01-Basics/01-what-is-html.html" class="module-link">Start →</a>
+            </div>
+
+            <div class="module-card">
+                <h3>2. HTML Elements</h3>
+                <p>Learn every HTML element - text, links, images, lists, and more.</p>
+                <a href="02-Elements/index.html" class="module-link">Start →</a>
+            </div>
+
+            <div class="module-card">
+                <h3>3. HTML Forms</h3>
+                <p>Create forms to collect user input - inputs, buttons, validation.</p>
+                <span class="module-link" style="opacity: 0.5;">🔒 Coming soon — unlocks in Mission 4</span>
+            </div>
+
+            <div class="module-card">
+                <h3>4. HTML Tables</h3>
+                <p>Display data in tables with rows, columns, and headers.</p>
+                <span class="module-link" style="opacity: 0.5;">🔒 Coming soon</span>
+            </div>
+
+            <div class="module-card">
+                <h3>5. HTML Media</h3>
+                <p>Add images, audio, video, and other media to your pages.</p>
+                <span class="module-link" style="opacity: 0.5;">🔒 Coming soon</span>
+            </div>
+
+            <div class="module-card">
+                <h3>6. Advanced HTML</h3>
+                <p>Semantic HTML, accessibility, SEO, and modern best practices.</p>
+                <span class="module-link" style="opacity: 0.5;">🔒 Coming soon</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Master Web Development - HTML Course</p>
+    </footer>
+</body>
+</html>

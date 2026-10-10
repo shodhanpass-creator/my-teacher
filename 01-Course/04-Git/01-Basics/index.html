@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Basics - Master Web Development</title>
+    <style>
+        /* ========================================
+           DESIGN SYSTEM - Reused from course template
+           (same CSS variables across ALL lessons)
+           ======================================== */
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --accent: #fd79a8; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note.danger { border-left-color: var(--danger); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        .diagram { background: var(--dark-light); padding: 2rem; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); line-height: 1.4; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { text-align: left; padding: 0.8rem; border-bottom: 1px solid var(--card-border); }
+        th { color: var(--primary); }
+        td { color: var(--text-muted); }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        .nav-btn.disabled { opacity: 0.4; pointer-events: none; }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> →
+            <a href="../index.html">Git</a> →
+            Basics
+        </div>
+
+        <h1>Git Basics — The Time Machine</h1>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 30 minutes</span>
+            <span>🎯 Difficulty: Beginner (but this is a SUPERPOWER)</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: WHY THIS EXISTS
+             ======================================== -->
+        <h2>Why Does Git Exist?</h2>
+
+        <p>Imagine deleting <span class="inline-code">todo-app.html</span> by accident. Press <span class="inline-code">Ctrl+Z</span>... <strong>nothing happens.</strong> Your work is gone. Forever.</p>
+
+        <p>In 2005, the Linux operating system (which runs most of the world's servers) lost its free version-control tool. Linus Torvalds got angry, locked himself in a room, and wrote a replacement in about 10 days. That tool is <strong>Git</strong>.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Definition:</div>
+            <p><strong>Version Control System (VCS)</strong> — software that records snapshots of your files over time, so you can rewind, compare, and collaborate safely.</p>
+            <p><strong>Analogy:</strong> Git is a save-point system in a video game — but for every file, forever. Even better: you can create a <em>parallel universe</em> (a <strong>branch</strong>) to try something risky, and delete it if it fails.</p>
+        </div>
+
+        <p>Every company on Earth uses it: Google, Netflix, Microsoft. A resume without Git gets rejected instantly. This is not optional knowledge — it IS the job.</p>
+
+        <!-- ========================================
+             SECTION 2: THE THREE ROOMS
+             ======================================== -->
+        <h2>The Three Rooms (Core Mental Model)</h2>
+
+        <p>Most beginners fail Git because they never build this picture. Memorize it:</p>
+
+        <div class="diagram">   YOUR FOLDER          THE WAREHOUSE         THE SAFE VAULT
+ ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+ │ Working Dir  │ --> │  Staging     │ --> │  Repository   │
+ │ (files you   │ add │  Area        │commit│ (.git folder) │
+ │  edit daily) │     │  ("cart")    │     │  = safe vault │
+ └──────────────┘     └──────────────┘     └──────────────┘
+     "store"            "shopping            "pay and take
+                        cart"                it home"</div>
+
+        <ul>
+            <li><strong>Working Directory</strong> — your folder, exactly what you see in VS Code</li>
+            <li><strong>Staging Area</strong> — a shopping cart: you <em>choose</em> which changes go into the next snapshot</li>
+            <li><strong>Repository</strong> — the permanent, time-stamped vault (a hidden folder called <span class="inline-code">.git</span>)</li>
+        </ul>
+
+        <div class="note success">
+            <div class="note-title">✅ Key Word: commit</div>
+            <p>A <strong>commit</strong> = one named snapshot + a message explaining WHY. Senior engineers treat commits like sentences in a story. Future-you and code reviewers will read them.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 3: SETUP
+             ======================================== -->
+        <h2>Step 1 — Setup (once per machine)</h2>
+
+        <p>Open the VS Code terminal with <span class="inline-code">Ctrl+`</span> (Ctrl + backtick). Then:</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 One-time configuration</div>
+<pre><code># "pwd" = print working directory. Always know WHERE you are before acting.
+pwd
+
+# "git init" = initialize a repository here. Creates the hidden .git vault.
+git init
+
+# Tell Git who you are. Required! Every commit is signed with this name.
+# --global is a "flag": it means "apply this setting everywhere on my machine".
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 4: DAILY WORKFLOW
+             ======================================== -->
+        <h2>Step 2 — The Daily Workflow</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 The 4 commands you'll type 10,000 times</div>
+<pre><code># 1. What does Git see right now? READ THIS EVERY TIME. Red = not staged, green = staged.
+git status
+
+# 2. "git add ." = put EVERYTHING in the current folder (the "." means "all of here")
+#    into the shopping cart. To stage one file only: git add README.md
+git add .
+
+# 3. "commit" = pay for the cart. -m stands for "message" (a flag).
+#    Present tense, imperative mood: "Add", "Fix" — never "Added" or "update".
+git commit -m "Initial commit: course lessons + 5 beginner projects"
+
+# 4. "log" = view your time machine's dashboard. --oneline compresses history to one line per snapshot.
+git log --oneline</code></pre>
+        </div>
+
+        <div class="note warning">
+            <div class="note-title">🤔 Think like an engineer:</div>
+            <p>Why doesn't Git just commit everything automatically? Answer: sometimes you have junk files, secrets, or half-finished experiments in your folder. The staging area is a <strong>checkpoint where you decide what becomes history</strong>. Professional habit: always run <span class="inline-code">git status</span> BEFORE <span class="inline-code">git add</span>.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 5: COMMIT MESSAGES
+             ======================================== -->
+        <h2>Commit Messages — Writing Like a Professional</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Bad vs Good</div>
+<pre><code># ❌ BAD - tells future-you nothing
+git commit -m "update"
+git commit -m "fix"
+git commit -m "stuff"
+
+# ✅ GOOD - tells a story
+git commit -m "Add filter buttons to todo app"
+git commit -m "Fix clock showing 13:00 instead of 1:00 PM"
+git commit -m "Refactor weather fetch into separate function"
+
+# ✅ PROFESSIONAL (Conventional Commits - used by real teams)
+git commit -m "feat: add dark mode toggle"
+git commit -m "fix: prevent XSS in todo rendering"</code></pre>
+        </div>
+
+        <p>The prefixes <span class="inline-code">feat:</span>, <span class="inline-code">fix:</span>, <span class="inline-code">docs:</span>, <span class="inline-code">refactor:</span> follow the <strong>Conventional Commits</strong> standard — tools at real companies auto-generate changelogs from them.</p>
+
+        <!-- ========================================
+             SECTION 6: GIT VS GITHUB
+             ======================================== -->
+        <h2>Git vs GitHub (interviewers LOVE this question)</h2>
+
+        <table>
+            <tr><th></th><th>Git</th><th>GitHub</th></tr>
+            <tr><td><strong>What</strong></td><td>A program on YOUR computer</td><td>A website that hosts copies</td></tr>
+            <tr><td><strong>Analogy</strong></td><td>The camera + photo album</td><td>Instagram for your code</td></tr>
+            <tr><td><strong>Offline?</strong></td><td>Yes, works without internet</td><td>No</td></tr>
+        </table>
+
+        <!-- ========================================
+             SECTION 7: COMMON ERRORS
+             ======================================== -->
+        <h2>Common Beginner Errors (feel them on purpose)</h2>
+
+        <table>
+            <tr><th>Error message</th><th>Why it happened</th><th>Fix</th></tr>
+            <tr>
+                <td><span class="inline-code">fatal: not a git repository</span></td>
+                <td>You ran a git command in a folder where no vault exists (or a subfolder)</td>
+                <td>Run <span class="inline-code">git init</span> or check <span class="inline-code">pwd</span></td>
+            </tr>
+            <tr>
+                <td><span class="inline-code">Please tell me who you are</span></td>
+                <td>user.name / user.email not configured</td>
+                <td>Run the two config commands from Step 1</td>
+            </tr>
+            <tr>
+                <td><span class="inline-code">nothing added to commit</span></td>
+                <td>You ran <span class="inline-code">commit</span> without <span class="inline-code">add</span> — the cart was empty</td>
+                <td><span class="inline-code">git add .</span> first</td>
+            </tr>
+            <tr>
+                <td>"I lost my commit!"</td>
+                <td>You almost never lose commits in Git — that's the whole point</td>
+                <td><span class="inline-code">git log --oneline</span> to find it, <span class="inline-code">git reflog</span> for the "vault of the vault"</td>
+            </tr>
+        </table>
+
+        <!-- ========================================
+             SECTION 8: PRACTICE
+             ======================================== -->
+        <h2>Practice</h2>
+        <ul>
+            <li><strong>Easy:</strong> Create <span class="inline-code">NOTES.md</span>, write one line, commit it: <span class="inline-code">"Add study notes"</span></li>
+            <li><strong>Medium:</strong> Edit <span class="inline-code">README.md</span> (add one line), then run <span class="inline-code">git diff</span> — explain what the <span class="inline-code">+</span> and <span class="inline-code">-</span> colors mean</li>
+            <li><strong>Hard:</strong> Make 3 quick commits, then read <span class="inline-code">git log --oneline</span> — write the "story" your project now tells</li>
+        </ul>
+
+        <!-- ========================================
+             SECTION 9: HOMEWORK
+             ======================================== -->
+        <h2>Homework (XP locked behind this)</h2>
+        <ol>
+            <li>Run the full workflow. Paste your <span class="inline-code">git log --oneline</span> output to your mentor.</li>
+            <li>Answer in one sentence: what is the difference between Git and GitHub?</li>
+            <li>Answer: why does the staging area exist?</li>
+            <li>Install the <strong>GitLens</strong> VS Code extension. Report one thing it shows that surprised you.</li>
+        </ol>
+
+        <div class="note">
+            <div class="note-title">🤔 Did You Know?</div>
+            <p>Torvalds named it "git" — British slang for a stupid, obnoxious person. His words: <em>"I'm an egotistical bastard, so I name all my projects after myself: Linux, git..."</em> The most important tool in software history was named as a self-insult.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../../03-JavaScript/04-Advanced/index.html" class="nav-btn">← Previous: Advanced JS</a>
+            <span class="nav-btn disabled">Next: Branching (coming soon)</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics - Master Web Development</title>
+    <style>
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --accent: #fd79a8; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .diagram { background: var(--dark-light); padding: 2rem; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); line-height: 1.4; }
+        .quiz { background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .quiz h3 { color: var(--warning); margin-bottom: 1rem; }
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-question p { font-weight: 600; color: var(--text); }
+        .quiz-options { list-style: none; margin-left: 0; }
+        .quiz-options li { padding: 0.5rem 0; }
+        .exercise { background: var(--card-bg); border: 2px solid var(--success); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .exercise h3 { color: var(--success); margin-bottom: 1rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">JavaScript</a> → 
+            Basics
+        </div>
+
+        <h1>JavaScript Basics</h1>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 25 minutes</span>
+            <span>🎯 Difficulty: Beginner</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: WHAT IS JAVASCRIPT?
+             ======================================== -->
+        <h2>What is JavaScript?</h2>
+
+        <p>JavaScript is a <strong>programming language</strong> that makes websites interactive. While HTML provides structure and CSS provides style, JavaScript provides <strong>behavior</strong>.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>If HTML is the skeleton and CSS is the clothing, then JavaScript is the <strong>brain and muscles</strong>. It makes the page think, move, and respond to your actions!</p>
+        </div>
+
+        <h3>What Can JavaScript Do?</h3>
+        <ul>
+            <li>Respond to button clicks</li>
+            <li>Validate form inputs</li>
+            <li>Change HTML content dynamically</li>
+            <li>Change CSS styles</li>
+            <li>Fetch data from servers</li>
+            <li>Create animations</li>
+            <li>Build games</li>
+            <li>And much more!</li>
+        </ul>
+
+        <!-- ========================================
+             SECTION 2: WHERE TO WRITE JAVASCRIPT
+             ======================================== -->
+        <h2>Where to Write JavaScript</h2>
+
+        <p>There are three ways to add JavaScript to your HTML:</p>
+
+        <h3>Method 1: Internal JavaScript (in &lt;script&gt; tag)</h3>
+        <div class="example-box">
+            <div class="example-label">📄 Internal JS</div>
+<pre><code>&lt;script&gt;
+    alert('Hello, World!');
+&lt;/script&gt;</code></pre>
+        </div>
+
+        <h3>Method 2: External JavaScript (BEST)</h3>
+        <div class="example-box">
+            <div class="example-label">📄 External JS</div>
+<pre><code>&lt;!-- HTML file --&gt;
+&lt;script src="script.js"&gt;&lt;/script&gt;
+
+// script.js file
+alert('Hello, World!');</code></pre>
+        </div>
+
+        <div class="note success">
+            <div class="note-title">✅ Best Practice:</div>
+            <p>Always use external JavaScript files. It keeps your code organized and the browser can cache the file for faster loading.</p>
+        </div>
+
+        <h3>Method 3: Inline JavaScript (AVOID)</h3>
+        <div class="example-box">
+            <div class="example-label">📄 Inline JS (Avoid!)</div>
+<pre><code>&lt;button onclick="alert('Clicked!')"&gt;Click Me&lt;/button&gt;</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 3: VARIABLES
+             ======================================== -->
+        <h2>Variables</h2>
+
+        <p>Variables are like <strong>labeled boxes</strong> that store information. You give the box a name, and you can put things in it, take things out, or change what's inside.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>A variable is like a <strong>labeled jar</strong>. The label is the variable name, and the jar can hold different things (values). You can put cookies in it, then later replace them with candies.</p>
+        </div>
+
+        <h3>Three Ways to Declare Variables</h3>
+
+        <div class="example-box">
+            <div class="example-label">📄 Variable Declarations</div>
+<pre><code>// var - old way, avoid using
+var name = "John";
+
+// let - can be changed (reassigned)
+let age = 25;
+age = 26;  // This is OK
+
+// const - cannot be changed (constant)
+const PI = 3.14159;
+PI = 3;  // ERROR! Cannot change const</code></pre>
+        </div>
+
+        <div class="diagram">
+VAR vs LET vs CONST:
+
+    var name = "John";
+    ├── Can be redeclared
+    ├── Can be reassigned
+    ├── Function scoped (old behavior)
+    └── ❌ AVOID using this
+
+    let age = 25;
+    ├── Cannot be redeclared
+    ├── CAN be reassigned
+    ├── Block scoped (modern)
+    └── ✅ Use when value changes
+
+    const PI = 3.14;
+    ├── Cannot be redeclared
+    ├── Cannot be reassigned
+    ├── Block scoped (modern)
+    └── ✅ Use when value stays same</div>
+
+        <!-- ========================================
+             SECTION 4: DATA TYPES
+             ======================================== -->
+        <h2>Data Types</h2>
+
+        <p>Data types tell JavaScript what kind of value you're working with.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 JavaScript Data Types</div>
+<pre><code>// STRING - text (always in quotes)
+let name = "John";
+let greeting = 'Hello';
+let message = `Hi ${name}`;  // Template literal
+
+// NUMBER - integers and decimals
+let age = 25;
+let price = 19.99;
+let negative = -10;
+
+// BOOLEAN - true or false
+let isStudent = true;
+let isGraduated = false;
+
+// UNDEFINED - declared but no value
+let x;
+console.log(x);  // undefined
+
+// NULL - intentionally empty
+let empty = null;
+
+// OBJECT - key-value pairs
+let person = {
+    name: "John",
+    age: 25,
+    isStudent: true
+};
+
+// ARRAY - list of values
+let colors = ["red", "blue", "green"];
+let numbers = [1, 2, 3, 4, 5];</code></pre>
+        </div>
+
+        <div class="diagram">
+DATA TYPES VISUAL:
+
+    String:    "Hello"     → Text in quotes
+    Number:    42          → Just a number
+    Boolean:   true/false  → Yes/No answer
+    Undefined: undefined   → No value yet
+    Null:      null        → Empty on purpose
+    Object:    {key: val}  → Key-value pairs
+    Array:     [1, 2, 3]   → Ordered list</div>
+
+        <!-- ========================================
+             SECTION 5: OPERATORS
+             ======================================== -->
+        <h2>Operators</h2>
+
+        <h3>Arithmetic Operators</h3>
+        <div class="example-box">
+            <div class="example-label">📄 Math Operations</div>
+<pre><code>let a = 10;
+let b = 3;
+
+console.log(a + b);   // 13 (addition)
+console.log(a - b);   // 7  (subtraction)
+console.log(a * b);   // 30 (multiplication)
+console.log(a / b);   // 3.333... (division)
+console.log(a % b);   // 1  (modulus - remainder)
+console.log(a ** b);  // 1000 (exponent - power)</code></pre>
+        </div>
+
+        <h3>Comparison Operators</h3>
+        <div class="example-box">
+            <div class="example-label">📄 Comparisons</div>
+<pre><code>let x = 5;
+
+// Equal to (value only)
+console.log(x == "5");    // true (loose comparison)
+console.log(x === "5");   // false (strict comparison)
+
+// Not equal to
+console.log(x != "5");    // false
+console.log(x !== "5");   // true
+
+// Greater/Less than
+console.log(x > 3);       // true
+console.log(x < 10);      // true
+console.log(x >= 5);      // true
+console.log(x <= 4);      // false</code></pre>
+        </div>
+
+        <div class="note warning">
+            <div class="note-title">⚠️ == vs ===</div>
+            <p><span class="inline-code">==</span> compares values only (type coercion). <span class="inline-code">===</span> compares values AND types. Always use <span class="inline-code">===</span> for predictable results!</p>
+        </div>
+
+        <h3>Logical Operators</h3>
+        <div class="example-box">
+            <div class="example-label">📄 Logical Operations</div>
+<pre><code>let a = true;
+let b = false;
+
+// AND - both must be true
+console.log(a && b);   // false
+
+// OR - at least one must be true
+console.log(a || b);   // true
+
+// NOT - flips the value
+console.log(!a);       // false</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 6: CONDITIONALS
+             ======================================== -->
+        <h2>Conditionals (If/Else)</h2>
+
+        <p>Conditionals let your code make decisions based on conditions.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 If/Else Statements</div>
+<pre><code>let age = 18;
+
+// Basic if
+if (age >= 18) {
+    console.log("You can vote!");
+}
+
+// If/Else
+if (age >= 18) {
+    console.log("Adult");
+} else {
+    console.log("Minor");
+}
+
+// If/Else If/Else
+if (age < 13) {
+    console.log("Child");
+} else if (age < 18) {
+    console.log("Teenager");
+} else {
+    console.log("Adult");
+}
+
+// Ternary Operator (shorthand)
+let status = age >= 18 ? "Adult" : "Minor";
+console.log(status);  // "Adult"</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Switch Statement</div>
+<pre><code>let day = "Monday";
+
+switch (day) {
+    case "Monday":
+        console.log("Start of work week");
+        break;
+    case "Friday":
+        console.log("Almost weekend!");
+        break;
+    case "Saturday":
+    case "Sunday":
+        console.log("Weekend!");
+        break;
+    default:
+        console.log("Regular day");
+}</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 7: LOOPS
+             ======================================== -->
+        <h2>Loops</h2>
+
+        <p>Loops repeat code multiple times.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 For Loop</div>
+<pre><code>// Basic for loop
+for (let i = 0; i < 5; i++) {
+    console.log(i);  // 0, 1, 2, 3, 4
+}
+
+// Loop through array
+let colors = ["red", "blue", "green"];
+for (let i = 0; i < colors.length; i++) {
+    console.log(colors[i]);
+}</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 While Loop</div>
+<pre><code>// While loop
+let count = 0;
+while (count < 5) {
+    console.log(count);
+    count++;
+}
+
+// Do/while loop (runs at least once)
+let num = 10;
+do {
+    console.log(num);
+    num--;
+} while (num > 0);</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 For...of and For...in</div>
+<pre><code>// For...of - loops through VALUES
+let fruits = ["apple", "banana", "orange"];
+for (let fruit of fruits) {
+    console.log(fruit);
+}
+
+// For...in - loops through KEYS
+let person = { name: "John", age: 25 };
+for (let key in person) {
+    console.log(key + ": " + person[key]);
+}</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 8: FUNCTIONS
+             ======================================== -->
+        <h2>Functions</h2>
+
+        <p>Functions are <strong>reusable blocks of code</strong>. Write once, use many times!</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>A function is like a <strong>recipe</strong>. You write the steps once (function definition), and then you can follow that recipe anytime (function call) to make the same dish.</p>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Function Declarations</div>
+<pre><code>// Function Declaration
+function greet(name) {
+    return "Hello, " + name + "!";
+}
+
+// Function Expression
+const add = function(a, b) {
+    return a + b;
+};
+
+// Arrow Function (ES6+)
+const multiply = (a, b) => a * b;
+
+// Using the functions
+console.log(greet("John"));      // "Hello, John!"
+console.log(add(5, 3));          // 8
+console.log(multiply(4, 2));     // 8</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Function Parameters</div>
+<pre><code>// Default parameters
+function greet(name = "World") {
+    return `Hello, ${name}!`;
+}
+console.log(greet());        // "Hello, World!"
+console.log(greet("John"));  // "Hello, John!"
+
+// Rest parameters
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+console.log(sum(1, 2, 3, 4));  // 10</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 9: ARRAYS
+             ======================================== -->
+        <h2>Arrays</h2>
+
+        <p>Arrays are <strong>ordered lists</strong> of values. They can hold any data type.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Array Basics</div>
+<pre><code>// Creating arrays
+let fruits = ["apple", "banana", "orange"];
+let numbers = [1, 2, 3, 4, 5];
+let mixed = ["hello", 42, true, null];
+
+// Accessing elements (index starts at 0)
+console.log(fruits[0]);   // "apple"
+console.log(fruits[1]);   // "banana"
+console.log(fruits.length); // 3
+
+// Modifying elements
+fruits[0] = "grape";
+console.log(fruits);  // ["grape", "banana", "orange"]</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Array Methods</div>
+<pre><code>let fruits = ["apple", "banana", "orange"];
+
+// Add elements
+fruits.push("grape");        // Add to end
+fruits.unshift("mango");     // Add to start
+
+// Remove elements
+fruits.pop();                // Remove from end
+fruits.shift();              // Remove from start
+
+// Find elements
+let index = fruits.indexOf("banana");
+let found = fruits.find(f => f.length > 5);
+let exists = fruits.includes("orange");
+
+// Transform arrays
+let upper = fruits.map(f => f.toUpperCase());
+let long = fruits.filter(f => f.length > 5);
+let total = [1, 2, 3].reduce((sum, n) => sum + n, 0);
+
+// Sort
+let nums = [3, 1, 4, 1, 5, 9];
+nums.sort((a, b) => a - b);  // [1, 1, 3, 4, 5, 9]
+
+// Other useful methods
+fruits.join(", ");           // "apple, banana, orange"
+fruits.slice(1, 2);         // ["banana"]
+fruits.splice(1, 1);        // Removes "banana"</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 10: OBJECTS
+             ======================================== -->
+        <h2>Objects</h2>
+
+        <p>Objects store data as <strong>key-value pairs</strong>. They're like dictionaries or maps.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Object Basics</div>
+<pre><code>// Creating objects
+let person = {
+    name: "John",
+    age: 25,
+    isStudent: true,
+    hobbies: ["reading", "gaming"]
+};
+
+// Accessing values
+console.log(person.name);        // "John"
+console.log(person["age"]);      // 25
+console.log(person.hobbies[0]);  // "reading"
+
+// Modifying values
+person.age = 26;
+person.email = "john@email.com";
+
+// Deleting values
+delete person.isStudent;
+
+// Object methods
+let calculator = {
+    add(a, b) { return a + b; },
+    subtract(a, b) { return a - b; }
+};
+console.log(calculator.add(5, 3));  // 8</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 11: QUIZ
+             ======================================== -->
+        <div class="quiz">
+            <h3>📝 Quiz: Test Your Knowledge</h3>
+
+            <div class="quiz-question">
+                <p>1. What is the difference between let and const?</p>
+                <ul class="quiz-options">
+                    <li>A) let is faster, const is slower</li>
+                    <li>B) let can be reassigned, const cannot</li>
+                    <li>C) const can be reassigned, let cannot</li>
+                    <li>D) No difference</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What does === do?</p>
+                <ul class="quiz-options">
+                    <li>A) Assigns a value</li>
+                    <li>B) Compares values only</li>
+                    <li>C) Compares values AND types</li>
+                    <li>D) Creates a variable</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. How do you create a function in JavaScript?</p>
+                <ul class="quiz-options">
+                    <li>A) function = myFunc() {}</li>
+                    <li>B) function myFunc() {}</li>
+                    <li>C) create myFunc() {}</li>
+                    <li>D) def myFunc() {}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SECTION 12: EXERCISES
+             ======================================== -->
+        <div class="exercise">
+            <h3>🏋️ Practice Exercises</h3>
+
+            <p><strong>Exercise 1:</strong> Create variables of each data type (string, number, boolean) and log them to the console.</p>
+
+            <p><strong>Exercise 2:</strong> Write a function that takes two numbers and returns their sum.</p>
+
+            <p><strong>Exercise 3:</strong> Create an array of 5 fruits and write a loop that prints each fruit to the console.</p>
+
+            <p><strong>Exercise 4:</strong> Create an object representing a person with name, age, and hobbies. Write a function that takes this object and returns a greeting.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../index.html" class="nav-btn">← Previous: Course Overview</a>
+            <a href="02-dom-basics.html" class="nav-btn">Next: DOM Basics →</a>
+        </div>
+    </div>
+</body>
+</html>

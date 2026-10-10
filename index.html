@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete Web Development Course - HTML, CSS, JavaScript from Zero to Hero">
+    <title>Master Web Development - Complete Course</title>
+    <style>
+        /* ========================================
+           ROOT VARIABLES - Custom CSS Properties
+           ======================================== */
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5a4bd1;
+            --secondary: #00cec9;
+            --accent: #fd79a8;
+            --dark: #0a0a23;
+            --dark-light: #1a1a3e;
+            --text: #ffffff;
+            --text-muted: #b2b2d0;
+            --card-bg: #16163a;
+            --card-border: #2d2d5e;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9);
+            --gradient-2: linear-gradient(135deg, #fd79a8, #6c5ce7);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        /* ========================================
+           RESET - Remove default browser styles
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========================================
+           BASE STYLES - Default styles for body
+           ======================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           SCROLLBAR CUSTOMIZATION
+           ======================================== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* ========================================
+           ANIMATED BACKGROUND
+           ======================================== */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-animation .circle:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-animation .circle:nth-child(2) {
+            width: 600px;
+            height: 600px;
+            top: 50%;
+            right: -200px;
+            background: var(--secondary);
+            animation-delay: -5s;
+        }
+
+        .bg-animation .circle:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            bottom: -50px;
+            left: 30%;
+            background: var(--accent);
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-50px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+            75% {
+                transform: translateY(50px) rotate(-5deg);
+            }
+        }
+
+        /* ========================================
+           HEADER / NAVIGATION
+           ======================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(108, 92, 231, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--card-border);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        /* ========================================
+           STATS BAR
+           ======================================== */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ========================================
+           SECTIONS
+           ======================================== */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           COURSE MODULES GRID
+           ======================================== */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .module-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .module-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-card:nth-child(1) .module-icon {
+            background: rgba(108, 92, 231, 0.2);
+        }
+
+        .module-card:nth-child(2) .module-icon {
+            background: rgba(0, 206, 201, 0.2);
+        }
+
+        .module-card:nth-child(3) .module-icon {
+            background: rgba(253, 121, 168, 0.2);
+        }
+
+        .module-card:nth-child(4) .module-icon {
+            background: rgba(253, 203, 110, 0.2);
+        }
+
+        .module-card:nth-child(5) .module-icon {
+            background: rgba(116, 185, 255, 0.2);
+        }
+
+        .module-card:nth-child(6) .module-icon {
+            background: rgba(0, 184, 148, 0.2);
+        }
+
+        .module-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .module-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .module-topics {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-topics li {
+            padding: 0.4rem 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .module-topics li::before {
+            content: '✓ ';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .module-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .module-link:hover {
+            gap: 1rem;
+        }
+
+        /* ========================================
+           FEATURES SECTION
+           ======================================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           PROJECTS SHOWCASE
+           ======================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .stats {
+                gap: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         ANIMATED BACKGROUND ELEMENTS
+         ======================================== -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- ========================================
+         HEADER - Fixed navigation bar
+         ======================================== -->
+    <header>
+        <nav>
+            <a href="#" class="logo">MasterWebDev</a>
+            <ul class="nav-links">
+                <li><a href="#modules">Modules</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="01-Course/index.html">Start Learning</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========================================
+         HERO SECTION - Main banner
+         ======================================== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                Learn <span class="gradient-text">Web Development</span><br>
+                From Zero to Hero
+            </h1>
+            <p>
+                The most comprehensive, beginner-friendly course covering HTML, CSS, and JavaScript.
+                Build real projects and become a confident web developer.
+            </p>
+            <a href="01-Course/index.html" class="btn btn-primary">Start Learning Free</a>
+            <a href="#modules" class="btn btn-secondary">View Curriculum</a>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Lessons</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Examples</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         COURSE MODULES SECTION
+         ======================================== -->
+    <section id="modules">
+        <div class="section-header">
+            <h2>Course Modules</h2>
+            <p>Six comprehensive modules to take you from beginner to professional developer</p>
+        </div>
+
+        <div class="modules-grid">
+            <!-- HTML Module -->
+            <div class="module-card">
+                <div class="module-icon">HTML</div>
+                <h3>HTML - The Structure</h3>
+                <p>Learn how to create the skeleton of every website. HTML is the building block of the web.</p>
+                <ul class="module-topics">
+                    <li>All HTML5 Elements</li>
+                    <li>Forms & Inputs</li>
+                    <li>Tables & Data</li>
+                    <li>Semantic HTML</li>
+                    <li>Accessibility</li>
+                    <li>SEO Basics</li>
+                </ul>
+                <a href="01-Course/01-HTML/index.html" class="module-link">Start HTML Module →</a>
+            </div>
+
+            <!-- CSS Module -->
+            <div class="module-card">
+                <div class="module-icon">CSS</div>
+                <h3>CSS - The Style</h3>
+                <p>Make your websites beautiful. Learn colors, layouts, animations, and responsive design.</p>
+                <ul class="module-topics">
+                    <li>All CSS Properties</li>
+                    <li>Flexbox & Grid</li>
+                    <li>Responsive Design</li>
+                    <li>Animations</li>
+                    <li>Modern CSS</li>
+                    <li>Best Practices</li>
+                </ul>
+                <a href="01-Course/02-CSS/index.html" class="module-link">Start CSS Module →</a>
+            </div>
+
+            <!-- JavaScript Module -->
+            <div class="module-card">
+                <div class="module-icon">JS</div>
+                <h3>JavaScript - The Behavior</h3>
+                <p>Make your websites interactive. Learn programming from scratch with real examples.</p>
+                <ul class="module-topics">
+                    <li>Variables & Data Types</li>
+                    <li>Functions & Objects</li>
+                    <li>DOM Manipulation</li>
+                    <li>Events</li>
+                    <li>Async Programming</li>
+                    <li>ES6+ Features</li>
+                </ul>
+                <a href="01-Course/03-JavaScript/index.html" class="module-link">Start JS Module →</a>
+            </div>
+
+            <!-- Git Module -->
+            <div class="module-card">
+                <div class="module-icon">GIT</div>
+                <h3>Git - The Time Machine</h3>
+                <p>Protect your work, rewind mistakes, and collaborate like every professional developer does.</p>
+                <ul class="module-topics">
+                    <li>Version Control Basics</li>
+                    <li>Commits & Staging</li>
+                    <li>Branching & Merging</li>
+                    <li>GitHub Collaboration</li>
+                    <li>Code Review Workflow</li>
+                    <li>Recovery & Best Practices</li>
+                </ul>
+                <a href="01-Course/04-Git/index.html" class="module-link">Start Git Module →</a>
+            </div>
+
+            <!-- Python Module -->
+            <div class="module-card">
+                <div class="module-icon">PY</div>
+                <h3>Python - The Swiss Army Knife</h3>
+                <p>Automate your life, scrape the web, and build backends with the world's most beginner-friendly language.</p>
+                <ul class="module-topics">
+                    <li>Python Basics & Data Structures</li>
+                    <li>Object-Oriented Programming</li>
+                    <li>Automation & Web Scraping</li>
+                    <li>Testing with pytest</li>
+                    <li>Python for the Web</li>
+                    <li>CLI Tools</li>
+                </ul>
+                <a href="01-Course/05-Python/index.html" class="module-link">Start Python Module →</a>
+            </div>
+
+            <!-- Backend Module -->
+            <div class="module-card">
+                <div class="module-icon">API</div>
+                <h3>Backend - The Brain</h3>
+                <p>Build the servers powering every app. APIs, databases, authentication, and deployment.</p>
+                <ul class="module-topics">
+                    <li>HTTP & How the Web Works</li>
+                    <li>Node.js & Express</li>
+                    <li>REST API Design</li>
+                    <li>Databases & SQL</li>
+                    <li>Auth & Security</li>
+                    <li>Docker & Deployment</li>
+                </ul>
+                <a href="01-Course/06-Backend/index.html" class="module-link">Start Backend Module →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FEATURES SECTION
+         ======================================== -->
+    <section id="features">
+        <div class="section-header">
+            <h2>Why This Course?</h2>
+            <p>Designed for absolute beginners with no prior experience required</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👶</div>
+                <h3>Zero to Hero</h3>
+                <p>Start from absolute basics. Every concept explained like you're 5 years old.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>Hands-On Projects</h3>
+                <p>Build 20+ real projects to practice what you learn.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3>Detailed Explanations</h3>
+                <p>Every tag, property, and function explained thoroughly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Best Practices</h3>
+                <p>Learn industry standards from the start.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Regular Updates</h3>
+                <p>Content updated to match current web standards.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Complete Reference</h3>
+                <p>Use as a course or as a reference guide anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PROJECTS SHOWCASE SECTION
+         ======================================== -->
+    <section id="projects">
+        <div class="section-header">
+            <h2>Projects You'll Build</h2>
+            <p>Real-world projects to build your portfolio</p>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">Profile Card</div>
+                <div class="project-info">
+                    <h3>Profile Card</h3>
+                    <p>Your first project - a beautiful profile card component.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Beginner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: var(--gradient-2);">Calculator</div>
+                <div class="project-info">
+                    <h3>Calculator</h3>
+                    <p>A fully functional calculator app.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #00b894, #00cec9);">Portfolio</div>
+                <div class="project-info">
+                    <h3>Portfolio Website</h3>
+                    <p>A complete portfolio to showcase your work.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Responsive</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #fdcb6e, #e17055);">Weather App</div>
+                <div class="project-info">
+                    <h3>Weather App</h3>
+                    <p>Fetch real weather data from an API.</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">API</span>
+                        <span class="tag">JSON</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);">Todo App</div>
+                <div class="project-info">
+                    <h3>Todo Application</h3>
+                    <p>A complete task manager with local storage.</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">DOM</span>
+                        <span class="tag">LocalStorage</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #fd79a8, #e84393);">Dashboard</div>
+                <div class="project-info">
+                    <h3>Admin Dashboard</h3>
+                    <p>A professional admin panel with charts.</p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS Grid</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+    <footer>
+        <p>Master Web Development Course</p>
+        <p>Built with ❤️ for aspiring developers</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Basics - Master Web Development</title>
+    <style>
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --accent: #fd79a8; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        .output-box { background: #ffffff; color: #333; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border: 2px dashed var(--card-border); }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .diagram { background: var(--dark-light); padding: 2rem; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); line-height: 1.4; }
+        .quiz { background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .quiz h3 { color: var(--warning); margin-bottom: 1rem; }
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-question p { font-weight: 600; color: var(--text); }
+        .quiz-options { list-style: none; margin-left: 0; }
+        .quiz-options li { padding: 0.5rem 0; }
+        .exercise { background: var(--card-bg); border: 2px solid var(--success); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .exercise h3 { color: var(--success); margin-bottom: 1rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">CSS</a> → 
+            Basics
+        </div>
+
+        <h1>CSS Basics</h1>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 20 minutes</span>
+            <span>🎯 Difficulty: Beginner</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: WHAT IS CSS?
+             ======================================== -->
+        <h2>What is CSS?</h2>
+
+        <p>CSS stands for <strong>Cascading Style Sheets</strong>. It's the language that makes websites look beautiful. While HTML provides the structure, CSS provides the style.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>HTML is like a <strong>naked mannequin</strong> in a store window. CSS is the <strong>clothes, makeup, and jewelry</strong> that make it look stunning!</p>
+        </div>
+
+        <div class="diagram">
+╔══════════════════════════════════════════════════════════════╗
+║                    CSS: THE THREE C'S                       ║
+╚══════════════════════════════════════════════════════════════╝
+
+    C - CASCADING
+        Multiple rules can apply to the same element.
+        Later rules override earlier ones (unless !important).
+        Think: Like layers of paint - last coat covers previous.
+
+    S - STYLE
+        Defines how things look: colors, fonts, sizes, spacing.
+        Think: The visual appearance of clothes.
+
+    S - SHEETS
+        Rules are organized in style sheets (files or tags).
+        Think: A recipe book for styling your webpage.</div>
+
+        <!-- ========================================
+             SECTION 2: THREE WAYS TO ADD CSS
+             ======================================== -->
+        <h2>Three Ways to Add CSS</h2>
+
+        <p>There are three ways to add CSS to your HTML:</p>
+
+        <h3>Method 1: Inline CSS (inside the element)</h3>
+        <div class="example-box">
+            <div class="example-label">📄 Inline CSS</div>
+<pre><code>&lt;p style="color: blue; font-size: 18px;"&gt;This is blue text&lt;/p&gt;</code></pre>
+        </div>
+        <div class="note warning">
+            <div class="note-title">⚠️ When to use:</div>
+            <p>Only for quick testing. Hard to maintain for large projects. Avoid for real websites.</p>
+        </div>
+
+        <h3>Method 2: Internal CSS (in &lt;head&gt;)</h3>
+        <div class="example-box">
+            <div class="example-label">📄 Internal CSS</div>
+<pre><code>&lt;head&gt;
+    &lt;style&gt;
+        p {
+            color: blue;
+            font-size: 18px;
+        }
+        h1 {
+            color: red;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+        </div>
+        <div class="note">
+            <div class="note-title">When to use:</div>
+            <p>For single-page websites or when you need page-specific styles.</p>
+        </div>
+
+        <h3>Method 3: External CSS (BEST - separate file)</h3>
+        <div class="example-box">
+            <div class="example-label">📄 External CSS</div>
+<pre><code>&lt;!-- HTML file --&gt;
+&lt;head&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+
+/* styles.css file */
+p {
+    color: blue;
+    font-size: 18px;
+}
+
+h1 {
+    color: red;
+}</code></pre>
+        </div>
+        <div class="note success">
+            <div class="note-title">✅ BEST METHOD:</div>
+            <p>Use external CSS files for all real projects. It keeps your code organized, reusable, and easy to maintain.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 3: CSS SYNTAX
+             ======================================== -->
+        <h2>CSS Syntax</h2>
+
+        <p>Every CSS rule has two parts: a <strong>selector</strong> and <strong>declarations</strong>.</p>
+
+        <div class="diagram">
+CSS RULE STRUCTURE:
+
+    selector {
+        property: value;
+        property: value;
+    }
+
+Example:
+    p {
+        color: blue;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    ┌─────────┐  ┌─────────────────────────────────────┐
+    │ SELECTOR│  │          DECLARATIONS                │
+    │ (who?)  │  │     (what to change?)               │
+    └─────────┘  └─────────────────────────────────────┘
+    
+    p           { color: blue; font-size: 18px; }
+    ^            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    "Which       "Make it blue and 18 pixels"
+     element?"</div>
+
+        <div class="note">
+            <div class="note-title">💡 Breaking it down:</div>
+            <ul style="margin-left: 1rem;">
+                <li><strong>Selector</strong> = WHO to style (p, h1, .class, #id)</li>
+                <li><strong>Property</strong> = WHAT to change (color, font-size, margin)</li>
+                <li><strong>Value</strong> = HOW to change it (blue, 18px, 10px)</li>
+                <li><strong>Declaration</strong> = property: value;</li>
+            </ul>
+        </div>
+
+        <!-- ========================================
+             SECTION 4: CSS SELECTORS BASICS
+             ======================================== -->
+        <h2>Basic CSS Selectors</h2>
+
+        <p>Selectors tell CSS which HTML element(s) to style.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Basic Selectors</div>
+<pre><code>/* Element Selector - selects ALL elements of that type */
+p {
+    color: blue;
+}
+
+/* Class Selector - selects elements with class="name" */
+.my-class {
+    color: red;
+}
+
+/* ID Selector - selects element with id="name" */
+#my-id {
+    color: green;
+}
+
+/* Universal Selector - selects ALL elements */
+* {
+    margin: 0;
+    padding: 0;
+}</code></pre>
+        </div>
+
+        <div class="diagram">
+SELECTOR CHEAT SHEET:
+
+    Selector          Example              What it selects
+    ─────────────────────────────────────────────────────
+    Element           p                    All &lt;p&gt; elements
+    Class             .btn                 All class="btn" elements
+    ID                #header              Only id="header" element
+    Universal         *                    All elements
+    Grouping          h1, h2, h3           All h1, h2, and h3
+    Descendant        div p                All p inside div
+    Child             div > p              Direct children p of div
+    Adjacent Sibling  h1 + p               First p after h1</div>
+
+        <!-- ========================================
+             SECTION 5: COLORS
+             ======================================== -->
+        <h2>CSS Colors</h2>
+
+        <p>CSS supports many ways to define colors:</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Color Methods</div>
+<pre><code>/* Named Colors */
+p { color: red; }
+p { color: blue; }
+p { color: tomato; }
+
+/* Hex Colors (# followed by 6 characters) */
+p { color: #ff0000; }      /* Red */
+p { color: #00ff00; }      /* Green */
+p { color: #0000ff; }      /* Blue */
+p { color: #333333; }      /* Dark gray */
+
+/* RGB (Red, Green, Blue) */
+p { color: rgb(255, 0, 0); }       /* Red */
+p { color: rgb(0, 255, 0); }       /* Green */
+p { color: rgb(0, 0, 255); }       /* Blue */
+p { color: rgba(0, 0, 255, 0.5); } /* Semi-transparent blue */
+
+/* HSL (Hue, Saturation, Lightness) */
+p { color: hsl(0, 100%, 50%); }        /* Red */
+p { color: hsl(120, 100%, 50%); }      /* Green */
+p { color: hsla(240, 100%, 50%, 0.5); }/* Semi-transparent blue */</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 6: TYPOGRAPHY
+             ======================================== -->
+        <h2>CSS Typography</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Font Properties</div>
+<pre><code>p {
+    /* Font Family - which font to use */
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    
+    /* Font Size - how big the text is */
+    font-size: 18px;
+    font-size: 1.2rem;  /* Relative to parent */
+    font-size: 120%;    /* Percentage of parent */
+    
+    /* Font Weight - how bold */
+    font-weight: normal;  /* 400 */
+    font-weight: bold;    /* 700 */
+    font-weight: 300;     /* Light */
+    
+    /* Font Style */
+    font-style: italic;
+    font-style: normal;
+    
+    /* Text Color */
+    color: #333333;
+    
+    /* Line Height - space between lines */
+    line-height: 1.6;
+    
+    /* Text Alignment */
+    text-align: left;
+    text-align: center;
+    text-align: right;
+    
+    /* Text Decoration */
+    text-decoration: none;
+    text-decoration: underline;
+    text-decoration: line-through;
+    
+    /* Text Transform */
+    text-transform: uppercase;
+    text-transform: lowercase;
+    text-transform: capitalize;
+}</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 7: BOX MODEL
+             ======================================== -->
+        <h2>The Box Model</h2>
+
+        <p>Every element in CSS is a rectangular box. The box model defines how much space an element takes up.</p>
+
+        <div class="diagram">
+╔══════════════════════════════════════════════════════════════╗
+║                    THE CSS BOX MODEL                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+    ┌─────────────────────────────────────────────┐
+    │                  MARGIN                      │
+    │   (Space OUTSIDE the border)                │
+    │   ┌─────────────────────────────────────┐   │
+    │   │              BORDER                  │   │
+    │   │   (Line around the element)         │   │
+    │   │   ┌─────────────────────────────┐   │   │
+    │   │   │          PADDING             │   │   │
+    │   │   │  (Space INSIDE the border)  │   │   │
+    │   │   │   ┌─────────────────────┐   │   │   │
+    │   │   │   │      CONTENT        │   │   │   │
+    │   │   │   │  (Text, images)     │   │   │   │
+    │   │   │   └─────────────────────┘   │   │   │
+    │   │   └─────────────────────────────┘   │   │
+    │   └─────────────────────────────────────┘   │
+    └─────────────────────────────────────────────┘
+
+    Content: The actual content (text, images)
+    Padding: Space between content and border
+    Border: The visible border around the element
+    Margin: Space outside the border (between elements)</div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Box Model Example</div>
+<pre><code>.box {
+    /* Content */
+    width: 300px;
+    height: 200px;
+    
+    /* Padding (inside border) */
+    padding: 20px;          /* All sides */
+    padding-top: 10px;      /* Top only */
+    padding: 10px 20px;     /* Top/Bottom, Left/Right */
+    padding: 10px 20px 30px 40px; /* Top, Right, Bottom, Left */
+    
+    /* Border */
+    border: 2px solid black;
+    border-radius: 10px;    /* Rounded corners */
+    
+    /* Margin (outside border) */
+    margin: 20px;
+    margin: 10px auto;      /* Center horizontally */
+}</code></pre>
+        </div>
+
+        <div class="note success">
+            <div class="note-title">✅ Pro Tip: box-sizing</div>
+            <p>By default, width/height only includes the content. Add <span class="inline-code">box-sizing: border-box;</span> to include padding and border in the width. This makes layout much easier!</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 8: DISPLAY PROPERTY
+             ======================================== -->
+        <h2>The Display Property</h2>
+
+        <p>The display property controls how an element is rendered.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Display Values</div>
+<pre><code>/* Block - takes full width, starts new line */
+div {
+    display: block;
+}
+
+/* Inline - only takes needed width, no new line */
+span {
+    display: inline;
+}
+
+/* Inline-block - inline but can have width/height */
+.btn {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+}
+
+/* Flex - for flexbox layout */
+.container {
+    display: flex;
+}
+
+/* Grid - for grid layout */
+.grid-container {
+    display: grid;
+}
+
+/* None - hides element completely */
+.hidden {
+    display: none;
+}</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 9: POSITION
+             ======================================== -->
+        <h2>The Position Property</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Position Values</div>
+<pre><code>/* Static - default, normal flow */
+.box {
+    position: static;
+}
+
+/* Relative - relative to its normal position */
+.box {
+    position: relative;
+    top: 10px;    /* Move 10px down */
+    left: 20px;   /* Move 20px right */
+}
+
+/* Absolute - relative to nearest positioned ancestor */
+.box {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Fixed - relative to viewport (stays in place when scrolling) */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+/* Sticky - hybrid of relative and fixed */
+.nav {
+    position: sticky;
+    top: 0;
+}</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 10: MARGIN & PADDING
+             ======================================== -->
+        <h2>Margin and Padding</h2>
+
+        <div class="diagram">
+SHORTHAND VALUES:
+
+    margin: 10px;           → All sides 10px
+    margin: 10px 20px;      → Top/Bottom 10px, Left/Right 20px
+    margin: 10px 20px 30px; → Top 10px, Left/Right 20px, Bottom 30px
+    margin: 10px 20px 30px 40px; → Top, Right, Bottom, Left
+
+    ┌──────────────────────────┐
+    │          10px            │  ← Top
+    │  ┌──────────────────┐   │
+    │  │                  │   │
+    │20│     Content      │20px│ ← Left/Right
+    │  │                  │   │
+    │  └──────────────────┘   │
+    │          30px            │  ← Bottom
+    └──────────────────────────┘</div>
+
+        <!-- ========================================
+             SECTION 11: QUIZ
+             ======================================== -->
+        <div class="quiz">
+            <h3>📝 Quiz: Test Your Knowledge</h3>
+
+            <div class="quiz-question">
+                <p>1. What does CSS stand for?</p>
+                <ul class="quiz-options">
+                    <li>A) Computer Style Sheets</li>
+                    <li>B) Cascading Style Sheets</li>
+                    <li>C) Creative Style System</li>
+                    <li>D) Colorful Style Sheets</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. Which is the BEST way to add CSS to a website?</p>
+                <ul class="quiz-options">
+                    <li>A) Inline CSS</li>
+                    <li>B) Internal CSS</li>
+                    <li>C) External CSS file</li>
+                    <li>D) All are equally good</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. What does the box-sizing: border-box property do?</p>
+                <ul class="quiz-options">
+                    <li>A) Makes boxes rounded</li>
+                    <li>B) Includes padding and border in width/height</li>
+                    <li>C) Removes borders</li>
+                    <li>D) Nothing</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SECTION 12: EXERCISES
+             ======================================== -->
+        <div class="exercise">
+            <h3>🏋️ Practice Exercises</h3>
+
+            <p><strong>Exercise 1:</strong> Create an external CSS file and link it to your HTML. Add styles to change the background color and text color.</p>
+
+            <p><strong>Exercise 2:</strong> Create a box with 20px padding, 2px solid border, and 10px margin. Use the box model to calculate its total width.</p>
+
+            <p><strong>Exercise 3:</strong> Style a heading with a custom font, size, color, and text alignment.</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../index.html" class="nav-btn">← Previous: Course Overview</a>
+            <a href="02-selectors.html" class="nav-btn">Next: Selectors →</a>
+        </div>
+    </div>
+</body>
+</html>

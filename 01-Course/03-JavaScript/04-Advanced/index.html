@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced JavaScript - Master Web Development</title>
+    <style>
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --accent: #fd79a8; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">JavaScript</a> → 
+            Advanced
+        </div>
+
+        <h1>Advanced JavaScript</h1>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 30 minutes</span>
+            <span>🎯 Difficulty: Advanced</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: ES6+ FEATURES
+             ======================================== -->
+        <h2>ES6+ Features</h2>
+
+        <p>ES6 (ECMAScript 2015) introduced many powerful features. Here are the most important ones:</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Template Literals</div>
+<pre><code>let name = "John";
+let age = 25;
+
+// Old way (string concatenation)
+let old = "My name is " + name + " and I am " + age + " years old.";
+
+// New way (template literals)
+let modern = `My name is ${name} and I am ${age} years old.`;
+
+// Multi-line strings
+let html = `
+    &lt;div class="card"&gt;
+        &lt;h2&gt;${name}&lt;/h2&gt;
+        &lt;p&gt;Age: ${age}&lt;/p&gt;
+    &lt;/div&gt;
+`;</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Destructuring</div>
+<pre><code>// Array destructuring
+let [a, b, c] = [1, 2, 3];
+console.log(a);  // 1
+console.log(b);  // 2
+
+// Object destructuring
+let person = { name: "John", age: 25, city: "NYC" };
+let { name, age, city } = person;
+console.log(name);  // "John"
+
+// Skip properties
+let { name: userName, age: userAge } = person;
+
+// Default values
+let { name, age, job = "developer" } = person;</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Spread & Rest Operators</div>
+<pre><code>// Spread operator (...)
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1, 4, 5];  // [1, 2, 3, 4, 5]
+
+let obj1 = { a: 1, b: 2 };
+let obj2 = { ...obj1, c: 3 };  // { a: 1, b: 2, c: 3 }
+
+// Copy array
+let copy = [...arr1];
+
+// Rest parameters
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+console.log(sum(1, 2, 3, 4));  // 10</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Optional Chaining & Nullish Coalescing</div>
+<pre><code>// Optional chaining (?.)
+let user = {
+    name: "John",
+    address: {
+        city: "NYC"
+    }
+};
+
+console.log(user?.address?.city);     // "NYC"
+console.log(user?.phone?.number);     // undefined (no error!)
+
+// Nullish coalescing (??)
+let value = null;
+let defaultVal = value ?? "default";  // "default"
+
+let zero = 0;
+let result = zero ?? "default";  // 0 (only null/undefined)</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 2: CLASSES
+             ======================================== -->
+        <h2>Classes</h2>
+
+        <p>Classes are templates for creating objects. They're like blueprints for houses - you build the blueprint once, then create many houses from it.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Class Basics</div>
+<pre><code>// Creating a class
+class Person {
+    // Constructor - runs when you create a new object
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Method
+    greet() {
+        return `Hello, I'm ${this.name} and I'm ${this.age} years old.`;
+    }
+    
+    // Getter
+    get info() {
+        return `${this.name} (${this.age})`;
+    }
+    
+    // Static method (called on class, not instance)
+    static create(name, age) {
+        return new Person(name, age);
+    }
+}
+
+// Creating objects from the class
+let john = new Person("John", 25);
+let jane = new Person("Jane", 30);
+
+console.log(john.greet());  // "Hello, I'm John and I'm 25 years old."
+console.log(jane.info);     // "Jane (30)"
+
+// Static method
+let bob = Person.create("Bob", 35);</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Inheritance</div>
+<pre><code>// Parent class
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+    
+    speak() {
+        return `${this.name} makes a sound.`;
+    }
+}
+
+// Child class (inherits from Animal)
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name);  // Call parent constructor
+        this.breed = breed;
+    }
+    
+    // Override parent method
+    speak() {
+        return `${this.name} barks!`;
+    }
+    
+    // New method
+    fetch() {
+        return `${this.name} fetches the ball.`;
+    }
+}
+
+let rex = new Dog("Rex", "German Shepherd");
+console.log(rex.speak());   // "Rex barks!"
+console.log(rex.fetch());   // "Rex fetches the ball."</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 3: ASYNC JAVASCRIPT
+             ======================================== -->
+        <h2>Asynchronous JavaScript</h2>
+
+        <p>JavaScript runs code line by line. But some operations take time (like fetching data). <strong>Async</strong> programming lets JavaScript do other things while waiting.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>Imagine you're at a restaurant. You order food (async operation). You don't just stand there staring at the kitchen - you chat with friends (other code runs) until your food arrives (operation completes).</p>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Callbacks</div>
+<pre><code>// Callback function
+function fetchData(callback) {
+    setTimeout(() => {
+        let data = { name: "John", age: 25 };
+        callback(data);
+    }, 1000);
+}
+
+fetchData(function(data) {
+    console.log(data);  // After 1 second
+});
+
+// Problem: Callback Hell!
+fetchData(function(data1) {
+    fetchData(data1.id, function(data2) {
+        fetchData(data2.id, function(data3) {
+            // Hard to read and maintain!
+        });
+    });
+});</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Promises</div>
+<pre><code>// Promise - represents a future value
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let success = true;
+            if (success) {
+                resolve({ name: "John", age: 25 });
+            } else {
+                reject("Error fetching data");
+            }
+        }, 1000);
+    });
+}
+
+// Using promises
+fetchData()
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+    .finally(() => console.log("Done!"));
+
+// Chaining promises
+fetchData()
+    .then(data => process(data))
+    .then(processed => save(processed))
+    .then(() => console.log("Saved!"))
+    .catch(err => console.log(err));</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Async/Await (Modern!)</div>
+<pre><code>// Async/Await - cleaner way to handle promises
+async function getData() {
+    try {
+        let data = await fetchData();
+        console.log(data);
+        
+        let processed = await processData(data);
+        console.log(processed);
+        
+        await saveData(processed);
+        console.log("Saved!");
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+// Call the async function
+getData();</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 4: FETCH API
+             ======================================== -->
+        <h2>Fetch API</h2>
+
+        <p>The Fetch API lets you make HTTP requests to servers (like getting data from an API).</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Fetch API</div>
+<pre><code>// Basic GET request
+fetch("https://api.example.com/users")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+
+// Async/Await version
+async function getUsers() {
+    try {
+        let response = await fetch("https://api.example.com/users");
+        let data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+// POST request
+async function createUser(user) {
+    let response = await fetch("https://api.example.com/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    });
+    return await response.json();
+}</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 5: LOCAL STORAGE
+             ======================================== -->
+        <h2>Local Storage</h2>
+
+        <p>Local Storage lets you save data in the browser. The data persists even when the page is refreshed.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Local Storage</div>
+<pre><code>// Save data
+localStorage.setItem("name", "John");
+localStorage.setItem("age", "25");
+
+// Save objects (convert to JSON)
+let user = { name: "John", age: 25 };
+localStorage.setItem("user", JSON.stringify(user));
+
+// Get data
+let name = localStorage.getItem("name");  // "John"
+let user = JSON.parse(localStorage.getItem("user"));
+
+// Remove data
+localStorage.removeItem("name");
+
+// Clear all data
+localStorage.clear();
+
+// Check if key exists
+let exists = localStorage.getItem("name") !== null;</code></pre>
+        </div>
+
+        <div class="note success">
+            <div class="note-title">✅ Use Cases:</div>
+            <ul style="margin-left: 1rem;">
+                <li>Save user preferences (theme, language)</li>
+                <li>Cache data from API</li>
+                <li>Save form data (prevent data loss)</li>
+                <li>Build offline-capable apps</li>
+            </ul>
+        </div>
+
+        <!-- ========================================
+             SECTION 6: ERROR HANDLING
+             ======================================== -->
+        <h2>Error Handling</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Try/Catch</div>
+<pre><code>// Try/Catch block
+try {
+    // Code that might cause an error
+    let result = riskyOperation();
+    console.log(result);
+} catch (error) {
+    // Handle the error
+    console.log("Error:", error.message);
+} finally {
+    // Always runs (whether there's an error or not)
+    console.log("Cleanup code");
+}
+
+// Throwing custom errors
+function divide(a, b) {
+    if (b === 0) {
+        throw new Error("Cannot divide by zero!");
+    }
+    return a / b;
+}
+
+try {
+    console.log(divide(10, 0));
+} catch (error) {
+    console.log(error.message);  // "Cannot divide by zero!"
+}</code></pre>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../03-Events/index.html" class="nav-btn">← Previous: Events</a>
+            <a href="../../index.html" class="nav-btn">Back to Course Home →</a>
+        </div>
+    </div>
+</body>
+</html>

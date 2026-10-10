@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: How Browsers Work - Master Web Development</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --dark: #0a0a23;
+            --dark-light: #1a1a3e;
+            --text: #ffffff;
+            --text-muted: #b2b2d0;
+            --card-bg: #16163a;
+            --card-border: #2d2d5e;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --info: #74b9ff;
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+
+        .diagram { background: var(--dark-light); padding: 2rem; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); line-height: 1.4; }
+
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+
+        .quiz { background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .quiz h3 { color: var(--warning); margin-bottom: 1rem; }
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-question p { font-weight: 600; color: var(--text); }
+        .quiz-options { list-style: none; margin-left: 0; }
+        .quiz-options li { padding: 0.5rem 0; }
+
+        .exercise { background: var(--card-bg); border: 2px solid var(--success); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .exercise h3 { color: var(--success); margin-bottom: 1rem; }
+
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--card-border); }
+        th { background: var(--card-bg); color: var(--primary); font-weight: 700; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">HTML</a> → 
+            <a href="index.html">Basics</a> → 
+            How Browsers Work
+        </div>
+
+        <h1>Lesson 2: How Browsers Work</h1>
+
+        <div class="lesson-meta" style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 12 minutes</span>
+            <span>🎯 Difficulty: Beginner</span>
+            <span>📝 Lesson 2 of 6</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: WHAT IS A BROWSER?
+             ======================================== -->
+        <h2>What is a Browser?</h2>
+
+        <p>A web browser is a program that reads HTML files and shows you the webpage. You're using one right now! Common browsers include:</p>
+
+        <ul>
+            <li><strong>Google Chrome</strong> - Made by Google</li>
+            <li><strong>Mozilla Firefox</strong> - Made by Mozilla</li>
+            <li><strong>Safari</strong> - Made by Apple</li>
+            <li><strong>Microsoft Edge</strong> - Made by Microsoft</li>
+        </ul>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>A browser is like a <strong>TV screen</strong>. Your HTML file is like a TV show. The browser reads the show (HTML) and displays it on the screen (your monitor).</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 2: WHAT HAPPENS WHEN YOU VISIT A WEBSITE
+             ======================================== -->
+        <h2>What Happens When You Visit a Website?</h2>
+
+        <p>Here's what happens step by step when you type a website address and press Enter:</p>
+
+        <div class="diagram">
+╔══════════════════════════════════════════════════════════════╗
+║                    HOW A BROWSER WORKS                      ║
+╚══════════════════════════════════════════════════════════════╝
+
+    👤 YOU (User)
+       │
+       │  1. Type "google.com" and press Enter
+       ▼
+    🖥️ YOUR BROWSER (Chrome/Firefox/Safari)
+       │
+       │  2. Browser asks: "Where is google.com?"
+       │  3. DNS (Internet phonebook) finds the address
+       │  4. Browser connects to Google's server
+       ▼
+    🌐 GOOGLE'S SERVER (Computer somewhere in the world)
+       │
+       │  5. Server sends back an HTML file
+       │  6. Browser receives the file
+       ▼
+    🖥️ YOUR BROWSER
+       │
+       │  7. Browser reads the HTML line by line
+       │  8. Browser builds a tree structure (DOM)
+       │  9. Browser applies CSS styles
+       │  10. Browser runs JavaScript
+       ▼
+    👁️ YOUR EYES SEE THE WEBPAGE!</div>
+
+        <!-- ========================================
+             SECTION 3: THE DOM TREE
+             ======================================== -->
+        <h2>The DOM Tree</h2>
+
+        <p>When the browser reads HTML, it creates something called the <strong>DOM</strong> (Document Object Model). Think of it as a family tree of your HTML elements.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 HTML Code</div>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My Page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Welcome&lt;/h1&gt;
+        &lt;p&gt;Hello!&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <div class="diagram">
+THE DOM TREE (Family Tree):
+
+                    html  ← Great-grandparent
+                   /     \
+              head       body  ← Grandparents
+              /          /    \
+          title        h1      p  ← Children
+            |          |        |
+         "My Page"  "Welcome"  "Hello!"  ← Text (leaves)</div>
+
+        <div class="note success">
+            <div class="note-title">✅ Why Does This Matter?</div>
+            <p>JavaScript uses this tree to find and change elements. When you click a button and something changes on the page, JavaScript is climbing this tree to find the right element and update it!</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 4: HOW HTML BECOMES A WEBPAGE
+             ======================================== -->
+        <h2>How HTML Becomes a Webpage</h2>
+
+        <p>The browser processes your HTML in a specific order:</p>
+
+        <ol>
+            <li><strong>Parse HTML</strong> - The browser reads your HTML code line by line, from top to bottom</li>
+            <li><strong>Build DOM</strong> - It creates a tree structure of all elements</li>
+            <li><strong>Load CSS</strong> - It reads your CSS files and applies styles</li>
+            <li><strong>Build CSSOM</strong> - It creates a tree of all styles (CSS Object Model)</li>
+            <li><strong>Render Tree</strong> - It combines DOM and CSSOM</li>
+            <li><strong>Layout</strong> - It calculates where everything goes on screen</li>
+            <li><strong>Paint</strong> - It draws everything you see</li>
+        </ol>
+
+        <div class="diagram">
+THE RENDERING PIPELINE:
+
+    HTML File
+       │
+       ▼
+    ┌─────────┐
+    │  PARSE  │ ← Read HTML code
+    └────┬────┘
+         │
+         ▼
+    ┌─────────┐
+    │   DOM   │ ← Build element tree
+    └────┬────┘
+         │
+         ▼
+    ┌─────────┐
+    │  CSSOM  │ ← Build style tree (from CSS)
+    └────┬────┘
+         │
+         ▼
+    ┌──────────┐
+    │RENDER    │ ← Combine DOM + CSSOM
+    │TREE      │
+    └────┬─────┘
+         │
+         ▼
+    ┌─────────┐
+    │ LAYOUT  │ ← Calculate positions & sizes
+    └────┬────┘
+         │
+         ▼
+    ┌─────────┐
+    │  PAINT  │ ← Draw pixels on screen
+    └────┬────┘
+         │
+         ▼
+    👁️ YOU SEE THE WEBPAGE!</div>
+
+        <!-- ========================================
+             SECTION 5: WHAT IS CSS?
+             ======================================== -->
+        <h2>What is CSS?</h2>
+
+        <p>CSS stands for <strong>Cascading Style Sheets</strong>. If HTML is the skeleton of a webpage, CSS is the clothing and makeup.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>HTML is like a <strong>naked mannequin</strong> in a store. CSS is the <strong>clothes, makeup, and accessories</strong> that make it look beautiful!</p>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Example: HTML Without CSS</div>
+<pre><code>&lt;h1&gt;This is a heading&lt;/h1&gt;
+&lt;p&gt;This is a paragraph&lt;/p&gt;</code></pre>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Result: Plain black text on white background. Boring!</p>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Example: HTML With CSS</div>
+<pre><code>&lt;style&gt;
+    h1 { color: blue; font-size: 36px; }
+    p { color: gray; font-size: 18px; }
+&lt;/style&gt;
+&lt;h1&gt;This is a heading&lt;/h1&gt;
+&lt;p&gt;This is a paragraph&lt;/p&gt;</code></pre>
+            <p style="color: var(--text-muted); margin-top: 1rem;">Result: Beautiful blue heading and gray paragraph!</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 6: WHAT IS JAVASCRIPT?
+             ======================================== -->
+        <h2>What is JavaScript?</h2>
+
+        <p>JavaScript makes your webpage <strong>interactive</strong>. Without JavaScript, a webpage is just a static document. With JavaScript, users can click buttons, fill forms, play games, and more.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>If HTML is the skeleton and CSS is the clothing, then JavaScript is the <strong>brain and muscles</strong>. It makes the page think and move!</p>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Example: JavaScript in Action</div>
+<pre><code>&lt;button onclick="sayHello()"&gt;Click Me!&lt;/button&gt;
+
+&lt;script&gt;
+    function sayHello() {
+        alert('Hello! You clicked the button!');
+    }
+&lt;/script&gt;</code></pre>
+            <p style="color: var(--text-muted); margin-top: 1rem;">When you click the button, a popup appears!</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 7: THE COMPLETE PICTURE
+             ======================================== -->
+        <h2>The Complete Picture: HTML + CSS + JavaScript</h2>
+
+        <div class="diagram">
+╔══════════════════════════════════════════════════════════════╗
+║              THE THREE PILLARS OF WEB DEVELOPMENT           ║
+╚══════════════════════════════════════════════════════════════╝
+
+    ┌─────────────────────────────────────────────────────┐
+    │                    HTML                             │
+    │            (The Structure/Skeleton)                 │
+    │                                                     │
+    │   - Headings, paragraphs, links                    │
+    │   - Images, videos, forms                          │
+    │   - Content organization                           │
+    │                                                     │
+    │   Think: The bones of a body                       │
+    └─────────────────────────────────────────────────────┘
+                           │
+                           ▼
+    ┌─────────────────────────────────────────────────────┐
+    │                     CSS                             │
+    │             (The Style/Clothing)                    │
+    │                                                     │
+    │   - Colors, fonts, sizes                           │
+    │   - Layout, spacing, borders                       │
+    │   - Animations, transitions                        │
+    │                                                     │
+    │   Think: The clothes and makeup                    │
+    └─────────────────────────────────────────────────────┘
+                           │
+                           ▼
+    ┌─────────────────────────────────────────────────────┐
+    │                  JavaScript                         │
+    │            (The Behavior/Brain)                     │
+    │                                                     │
+    │   - Button clicks, form validation                 │
+    │   - Animations, data loading                       │
+    │   - Interactive features                           │
+    │                                                     │
+    │   Think: The brain and muscles                     │
+    └─────────────────────────────────────────────────────┘</div>
+
+        <!-- ========================================
+             SECTION 8: QUIZ
+             ======================================== -->
+        <div class="quiz">
+            <h3>📝 Quiz: Test Your Knowledge</h3>
+
+            <div class="quiz-question">
+                <p>1. What does DOM stand for?</p>
+                <ul class="quiz-options">
+                    <li>A) Document Object Model</li>
+                    <li>B) Data Object Manager</li>
+                    <li>C) Display Output Mode</li>
+                    <li>D) Document Order Method</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What is the first thing a browser does when visiting a website?</p>
+                <ul class="quiz-options">
+                    <li>A) Run JavaScript</li>
+                    <li>B) Apply CSS</li>
+                    <li>C) Parse the HTML</li>
+                    <li>D) Download images</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Which technology makes a webpage interactive?</p>
+                <ul class="quiz-options">
+                    <li>A) HTML</li>
+                    <li>B) CSS</li>
+                    <li>C) JavaScript</li>
+                    <li>D) All of the above</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. What does CSS stand for?</p>
+                <ul class="quiz-options">
+                    <li>A) Computer Style Sheets</li>
+                    <li>B) Creative Style System</li>
+                    <li>C) Cascading Style Sheets</li>
+                    <li>D) Colorful Style Sheets</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SECTION 9: EXERCISES
+             ======================================== -->
+        <div class="exercise">
+            <h3>🏋️ Practice Exercises</h3>
+
+            <p><strong>Exercise 1:</strong> Draw the DOM tree for this HTML:</p>
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;div&gt;
+            &lt;h1&gt;Title&lt;/h1&gt;
+            &lt;p&gt;Text&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+            <p><strong>Exercise 2:</strong> In your own words, explain the difference between HTML, CSS, and JavaScript.</p>
+
+            <p><strong>Exercise 3:</strong> Open any website and view the source code (Right-click → View Page Source). What HTML elements do you recognize?</p>
+        </div>
+
+        <!-- ========================================
+             NAVIGATION BUTTONS
+             ======================================== -->
+        <div class="nav-buttons">
+            <a href="01-what-is-html.html" class="nav-btn">← Previous: What is HTML?</a>
+            <a href="03-html-document-structure.html" class="nav-btn">Next: HTML Document Structure →</a>
+        </div>
+    </div>
+</body>
+</html>

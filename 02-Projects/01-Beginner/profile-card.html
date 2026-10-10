@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card Project - Master Web Development</title>
+    <style>
+        /* ========================================
+           ROOT VARIABLES
+           ======================================== */
+        :root {
+            --primary: #6c5ce7;
+            --dark: #0a0a23;
+            --dark-light: #1a1a3e;
+            --card-bg: #16163a;
+            --card-border: #2d2d5e;
+            --success: #00b894;
+            --accent: #fd79a8;
+            --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9);
+            --gradient-2: linear-gradient(135deg, #fd79a8, #6c5ce7);
+        }
+
+        /* ========================================
+           RESET STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========================================
+           BODY STYLES
+           ======================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ========================================
+           CARD STYLES
+           ======================================== */
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(108, 92, 231, 0.3);
+        }
+
+        /* ========================================
+           AVATAR STYLES
+           ======================================== */
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+            border: 4px solid var(--primary);
+        }
+
+        /* ========================================
+           PROFILE INFO STYLES
+           ======================================== */
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .profile-bio {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* ========================================
+           STATS STYLES
+           ======================================== */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
+            padding: 15px 0;
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* ========================================
+           SKILLS STYLES
+           ======================================== */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .skill {
+            padding: 6px 14px;
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* ========================================
+           SOCIAL LINKS STYLES
+           ======================================== */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--dark-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--card-border);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* ========================================
+           BUTTON STYLES
+           ======================================== */
+        .btn-follow {
+            width: 100%;
+            padding: 15px;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-follow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-follow.following {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 400px) {
+            .profile-card {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         PROFILE CARD HTML STRUCTURE
+         ======================================== -->
+    <div class="profile-card">
+        <!-- Avatar with initials -->
+        <div class="avatar">JD</div>
+
+        <!-- Name and title -->
+        <h2 class="profile-name">John Doe</h2>
+        <p class="profile-title">Full Stack Developer</p>
+
+        <!-- Bio -->
+        <p class="profile-bio">
+            Passionate developer who loves creating beautiful web experiences. 
+            Always learning and exploring new technologies.
+        </p>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">1.2K</div>
+                <div class="stat-label">Followers</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">489</div>
+                <div class="stat-label">Following</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Projects</div>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">React</span>
+            <span class="skill">Node.js</span>
+        </div>
+
+        <!-- Social links -->
+        <div class="social-links">
+            <a href="#" class="social-link" title="GitHub">GH</a>
+            <a href="#" class="social-link" title="LinkedIn">LI</a>
+            <a href="#" class="social-link" title="Twitter">TW</a>
+            <a href="#" class="social-link" title="Email">EM</a>
+        </div>
+
+        <!-- Follow button -->
+        <button class="btn-follow" id="followBtn">Follow</button>
+    </div>
+
+    <!-- ========================================
+         JAVASCRIPT - Interactive Features
+         ======================================== -->
+    <script>
+        // Get the follow button
+        const followBtn = document.getElementById('followBtn');
+        let isFollowing = false;
+
+        // Toggle follow state
+        followBtn.addEventListener('click', function() {
+            isFollowing = !isFollowing;
+            
+            if (isFollowing) {
+                followBtn.textContent = 'Following';
+                followBtn.classList.add('following');
+            } else {
+                followBtn.textContent = 'Follow';
+                followBtn.classList.remove('following');
+            }
+        });
+
+        // Add hover effect to avatar
+        const avatar = document.querySelector('.avatar');
+        avatar.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1) rotate(5deg)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+
+        avatar.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+    </script>
+</body>
+</html>

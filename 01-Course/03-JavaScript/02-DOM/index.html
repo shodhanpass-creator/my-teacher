@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Master Web Development</title>
+    <style>
+        :root { --primary: #6c5ce7; --dark: #0a0a23; --dark-light: #1a1a3e; --text: #ffffff; --text-muted: #b2b2d0; --card-bg: #16163a; --card-border: #2d2d5e; --success: #00b894; --warning: #fdcb6e; --danger: #d63031; --info: #74b9ff; --accent: #fd79a8; --gradient-1: linear-gradient(135deg, #6c5ce7, #00cec9); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: var(--text); line-height: 1.8; }
+        .container { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        h2 { font-size: 2rem; margin: 3rem 0 1rem; color: var(--primary); }
+        h3 { font-size: 1.4rem; margin: 2rem 0 0.8rem; color: var(--info); }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+        .breadcrumb { margin-bottom: 2rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .note { background: var(--card-bg); border-left: 4px solid var(--info); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+        .note.success { border-left-color: var(--success); }
+        .note.warning { border-left-color: var(--warning); }
+        .note-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        pre { background: var(--dark-light); padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); }
+        code { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.95rem; }
+        .inline-code { background: var(--dark-light); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Consolas', monospace; color: var(--accent); }
+        .example-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 1rem; font-weight: 700; }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        .diagram { background: var(--dark-light); padding: 2rem; border-radius: 8px; font-family: monospace; white-space: pre; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--card-border); line-height: 1.4; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--card-border); }
+        .nav-btn { padding: 0.8rem 1.5rem; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; color: var(--text); text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { border-color: var(--primary); background: rgba(108, 92, 231, 0.1); }
+        @media (max-width: 768px) { h1 { font-size: 2rem; } h2 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../../index.html">Home</a> → 
+            <a href="../index.html">JavaScript</a> → 
+            DOM Manipulation
+        </div>
+
+        <h1>DOM Manipulation</h1>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <span>📖 Reading time: 25 minutes</span>
+            <span>🎯 Difficulty: Intermediate</span>
+        </div>
+
+        <!-- ========================================
+             SECTION 1: WHAT IS DOM?
+             ======================================== -->
+        <h2>What is the DOM?</h2>
+
+        <p>The <strong>DOM</strong> (Document Object Model) is a tree-like representation of your HTML that JavaScript can read and modify.</p>
+
+        <div class="note">
+            <div class="note-title">💡 Think of it this way:</div>
+            <p>When the browser reads your HTML, it creates a <strong>family tree</strong> of all elements. JavaScript can climb this tree to find any element and change it - its content, style, or even add/remove elements!</p>
+        </div>
+
+        <div class="diagram">
+HTML Code:                DOM Tree:
+
+&lt;html&gt;                        html
+├── &lt;head&gt;                    /    \
+│   └── &lt;title&gt;            head    body
+│       └── "My Page"        |      /    \
+└── &lt;body&gt;                title   h1     p
+    ├── &lt;h1&gt;                 |      |      |
+    │   └── "Hello"        "My Page" "Hello" "World"
+    └── &lt;p&gt;
+        └── "World"</div>
+
+        <!-- ========================================
+             SECTION 2: SELECTING ELEMENTS
+             ======================================== -->
+        <h2>Selecting Elements</h2>
+
+        <p>To manipulate elements, you first need to <strong>find</strong> them in the DOM.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 Selecting Elements</div>
+<pre><code>// By ID (returns single element)
+let header = document.getElementById("header");
+
+// By class (returns collection)
+let items = document.getElementsByClassName("item");
+
+// By tag name (returns collection)
+let paragraphs = document.getElementsByTagName("p");
+
+// CSS Selector (returns first match)
+let first = document.querySelector(".card");
+let btn = document.querySelector("#submit-btn");
+
+// CSS Selector (returns ALL matches)
+let allCards = document.querySelectorAll(".card");
+let allLinks = document.querySelectorAll("a");</code></pre>
+        </div>
+
+        <div class="diagram">
+SELECTOR METHODS:
+
+    getElementById("id")      → One element
+    getElementsByClassName()  → Collection (live)
+    getElementsByTagName()    → Collection (live)
+    querySelector()           → First match
+    querySelectorAll()        → All matches (NodeList)</div>
+
+        <!-- ========================================
+             SECTION 3: CHANGING CONTENT
+             ======================================== -->
+        <h2>Changing Content</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Modifying Content</div>
+<pre><code>let element = document.getElementById("demo");
+
+// innerHTML - gets/sets HTML content
+element.innerHTML = "&lt;strong&gt;Hello!&lt;/strong&gt;";
+
+// textContent - gets/sets text only
+element.textContent = "Hello!";
+
+// innerText - gets/sets visible text
+element.innerText = "Hello!";
+
+// Create new HTML content
+element.innerHTML = `
+    &lt;h2&gt;New Heading&lt;/h2&gt;
+    &lt;p&gt;New paragraph&lt;/p&gt;
+`;</code></pre>
+        </div>
+
+        <div class="note warning">
+            <div class="note-title">⚠️ Security Warning:</div>
+            <p>Never use <span class="inline-code">innerHTML</span> with user input! It can cause <strong>XSS attacks</strong>. Use <span class="inline-code">textContent</span> for user-provided content.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 4: CHANGING STYLES
+             ======================================== -->
+        <h2>Changing Styles</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Modifying Styles</div>
+<pre><code>let box = document.getElementById("box");
+
+// style property (inline styles)
+box.style.backgroundColor = "blue";
+box.style.color = "white";
+box.style.padding = "20px";
+box.style.borderRadius = "8px";
+box.style.display = "none";
+
+// Using classList (BETTER!)
+box.classList.add("active");        // Add class
+box.classList.remove("active");     // Remove class
+box.classList.toggle("active");     // Toggle class
+box.classList.contains("active");   // Check if class exists
+
+// Replace all classes
+box.className = "new-class";</code></pre>
+        </div>
+
+        <div class="note success">
+            <div class="note-title">✅ Best Practice:</div>
+            <p>Use <span class="inline-code">classList</span> instead of <span class="inline-code">style</span> property. It's cleaner and keeps your styles in CSS where they belong.</p>
+        </div>
+
+        <!-- ========================================
+             SECTION 5: CHANGING ATTRIBUTES
+             ======================================== -->
+        <h2>Changing Attributes</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Modifying Attributes</div>
+<pre><code>let link = document.querySelector("a");
+
+// Get attribute
+let href = link.getAttribute("href");
+
+// Set attribute
+link.setAttribute("href", "https://google.com");
+link.setAttribute("target", "_blank");
+
+// Remove attribute
+link.removeAttribute("target");
+
+// Check if attribute exists
+let hasTarget = link.hasAttribute("target");
+
+// Using properties directly
+link.href = "https://google.com";
+link.id = "main-link";</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 6: CREATING ELEMENTS
+             ======================================== -->
+        <h2>Creating Elements</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Creating & Adding Elements</div>
+<pre><code>// Create a new element
+let newDiv = document.createElement("div");
+newDiv.textContent = "I'm new here!";
+newDiv.classList.add("card");
+
+// Add to the page
+document.body.appendChild(newDiv);  // Add to end of body
+
+// Add to specific parent
+let container = document.getElementById("container");
+container.appendChild(newDiv);
+
+// Insert before another element
+let ref = document.getElementById("reference");
+container.insertBefore(newDiv, ref);
+
+// Remove element
+container.removeChild(newDiv);
+
+// Clone element
+let clone = newDiv.cloneNode(true);  // true = deep clone
+container.appendChild(clone);
+
+// Replace element
+let old = document.getElementById("old");
+container.replaceChild(newDiv, old);</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Build a Complete Card</div>
+<pre><code>// Create a complete card element
+function createCard(title, description) {
+    let card = document.createElement("div");
+    card.classList.add("card");
+    
+    card.innerHTML = `
+        &lt;h3&gt;${title}&lt;/h3&gt;
+        &lt;p&gt;${description}&lt;/p&gt;
+        &lt;button onclick="this.parentElement.remove()"&gt;
+            Delete
+        &lt;/button&gt;
+    `;
+    
+    return card;
+}
+
+// Add card to page
+let card = createCard("My Title", "My Description");
+document.getElementById("container").appendChild(card);</code></pre>
+        </div>
+
+        <!-- ========================================
+             SECTION 7: TRAVERSING THE DOM
+             ======================================== -->
+        <h2>Traversing the DOM</h2>
+
+        <p>You can navigate through the DOM tree to find related elements.</p>
+
+        <div class="example-box">
+            <div class="example-label">📄 DOM Traversal</div>
+<pre><code>let element = document.getElementById("current");
+
+// Parent elements
+let parent = element.parentElement;
+let grandparent = element.closest(".section");
+
+// Child elements
+let firstChild = element.firstElementChild;
+let lastChild = element.lastElementChild;
+let children = element.children;  // HTMLCollection
+
+// Sibling elements
+let next = element.nextElementSibling;
+let prev = element.previousElementSibling;
+
+// All children (including text nodes)
+let allNodes = element.childNodes;</code></pre>
+        </div>
+
+        <div class="diagram">
+DOM TRAVERSAL VISUAL:
+
+    parentElement
+    ┌─────────────────────────────────────────────┐
+    │                                             │
+    │  previousElementSibling  element  nextElementSibling
+    │  ┌─────┐                ┌─────┐    ┌─────┐
+    │  │Prev │                │Current   │Next │
+    │  └─────┘                └─────┘    └─────┘
+    │                                             │
+    │  firstElementChild    lastElementChild      │
+    │  ┌─────┐                ┌─────┐            │
+    │  │First│                │Last │            │
+    │  └─────┘                └─────┘            │
+    └─────────────────────────────────────────────┘</div>
+
+        <!-- ========================================
+             SECTION 8: EVENTS
+             ======================================== -->
+        <h2>Event Handling</h2>
+
+        <div class="example-box">
+            <div class="example-label">📄 Adding Event Listeners</div>
+<pre><code>let button = document.getElementById("myButton");
+
+// Method 1: addEventListener (BEST)
+button.addEventListener("click", function() {
+    alert("Button clicked!");
+});
+
+// Method 2: Using named function
+function handleClick() {
+    console.log("Clicked!");
+}
+button.addEventListener("click", handleClick);
+
+// Remove event listener
+button.removeEventListener("click", handleClick);
+
+// Event object
+button.addEventListener("click", function(event) {
+    console.log("Clicked at:", event.clientX, event.clientY);
+    console.log("Target:", event.target);
+});</code></pre>
+        </div>
+
+        <div class="example-box">
+            <div class="example-label">📄 Common Events</div>
+<pre><code>// Mouse events
+element.addEventListener("click", handler);
+element.addEventListener("dblclick", handler);
+element.addEventListener("mouseenter", handler);
+element.addEventListener("mouseleave", handler);
+
+// Keyboard events
+document.addEventListener("keydown", handler);
+document.addEventListener("keyup", handler);
+
+// Form events
+input.addEventListener("input", handler);
+input.addEventListener("change", handler);
+form.addEventListener("submit", handler);
+
+// Window events
+window.addEventListener("resize", handler);
+window.addEventListener("scroll", handler);
+window.addEventListener("load", handler);</code></pre>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="../01-Basics/index.html" class="nav-btn">← Previous: Basics</a>
+            <a href="../03-Events/index.html" class="nav-btn">Next: Events →</a>
+        </div>
+    </div>
+</body>
+</html>
